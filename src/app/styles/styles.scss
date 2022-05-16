@@ -1,0 +1,68 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+@import "fonts";
+@import "colors";
+
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Rubik'
+);
+
+@include mat.core($custom-typography);
+
+$custom-orange: (
+  50 : #fdeee7,
+  100 : #f9d4c2,
+  200 : #f5b79a,
+  300 : #f19a71,
+  400 : #ee8452,
+  500 : #eb6e34,
+  600 : #e9662f,
+  700 : #e55b27,
+  800 : #e25121,
+  900 : #dd3f15,
+  A100 : #ffffff,
+  A200 : #ffe0da,
+  A400 : #ffb6a7,
+  A700 : #ffa28d,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+
+
+$mentocape-primary: mat.define-palette($custom-orange);
+$mentocape-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$mentocape-warn: mat.define-palette(mat.$red-palette);
+
+
+$mentocape-theme: mat.define-dark-theme((
+  color: (
+    primary: $mentocape-primary,
+    accent: $mentocape-accent,
+    warn: $mentocape-warn,
+  )
+));
+
+@include mat.all-component-themes($mentocape-theme);
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "Rubik", "Roboto", sans-serif; }

@@ -1,0 +1,66 @@
+@font-face {
+  font-family: 'Rubik';
+  src: local('Rubik Light'), local('Rubik-Light'),
+  url('~src/assets/fonts/Rubik-Light.woff2') format('woff2'),
+  url('~src/assets/fonts/Rubik-Light.woff') format('woff'),
+  url('~src/assets/fonts/Rubik-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: local('Rubik Black'), local('Rubik-Black'),
+  url('~src/assets/fonts/Rubik-Black.woff2') format('woff2'),
+  url('~src/assets/fonts/Rubik-Black.woff') format('woff'),
+  url('~src/assets/fonts/Rubik-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: local('Rubik SemiBold'), local('Rubik-SemiBold'),
+  url('~src/assets/fonts/Rubik-SemiBold.woff2') format('woff2'),
+  url('~src/assets/fonts/Rubik-SemiBold.woff') format('woff'),
+  url('~src/assets/fonts/Rubik-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: local('Rubik Bold'), local('Rubik-Bold'),
+  url('~src/assets/fonts/Rubik-Bold.woff2') format('woff2'),
+  url('~src/assets/fonts/Rubik-Bold.woff') format('woff'),
+  url('~src/assets/fonts/Rubik-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: local('Rubik Medium'), local('Rubik-Medium'),
+  url('~src/assets/fonts/Rubik-Medium.woff2') format('woff2'),
+  url('~src/assets/fonts/Rubik-Medium.woff') format('woff'),
+  url('~src/assets/fonts/Rubik-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: local('Rubik Regular'), local('Rubik-Regular'),
+  url('~src/assets/fonts/Rubik-Regular.woff2') format('woff2'),
+  url('~src/assets/fonts/Rubik-Regular.woff') format('woff'),
+  url('~src/assets/fonts/Rubik-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
