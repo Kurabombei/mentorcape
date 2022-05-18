@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-email-login',
@@ -15,7 +16,7 @@ export class EmailLoginComponent implements OnInit {
 
   serverMessage: string = '';
 
-  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder) {
+  constructor( private fb: FormBuilder, private auth: AuthService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -70,16 +71,24 @@ export class EmailLoginComponent implements OnInit {
 
     try {
       if (this.isLogin) {
-        await this.afAuth.signInWithEmailAndPassword(email, password);
+        await this.auth.loginWithEmail(email, password).then(res => {
+          if(res) {
+            this.auth.isLoggedIn = true;
+          }
+        }, error => {
+          console.log('error', error);
+          this.auth.isLoggedIn = false;
+        });
       }
       if (this.isSignup) {
-        await this.afAuth.createUserWithEmailAndPassword(email, password);
+        await this.auth.createUserWithEmailAndPassword(email, password);
       }
       if (this.isPasswordReset) {
-        await this.afAuth.sendPasswordResetEmail(email);
+        await this.auth.sendPasswordResetEmail(email);
         this.serverMessage = 'Check your email';
       }
     } catch (err: any) {
+      this.auth.isLoggedIn = false;
       this.serverMessage = err;
     }
 

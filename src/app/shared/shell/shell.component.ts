@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-shell',
@@ -15,7 +16,10 @@ export class ShellComponent {
       map(result => result.matches),
       shareReplay()
     );
+  isLoggedIn: boolean = false;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private auth: AuthService) {
+    this.isLoggedIn = this.auth.isLoggedIn; // todo refactor
+  }
 
 }
