@@ -1,19 +1,21 @@
 export class User {
-  name?: string;
-  surname?: string;
-  email?: string;
-  imageURL?: string;
-  location?: string;
-  age?: number;
-  roles?: Array<string>;
-  languages?: Array<string>;
-  groupsID?: Array<string>;
+	uid: string;
+	email: string;
+	displayName?: string;
+	photoURL?: string;
+	favoriteColor?: string;
+	location?: string;
+	age?: number;
+	roles?: Array<string>;
+	languages?: Array<string>;
+	groupsID?: Array<string>;
 
-  constructor() {
-    this.name = '';
-    this.surname = '';
-    this.roles = ['student'];
-    this.languages = [];
-    this.groupsID = [];
-  }
+	constructor() {
+		this.uid = '';
+		this.email = '';
+		this.displayName = '';
+		this.roles = ['student'];
+		this.languages = [];
+		this.groupsID = [];
+	}
 }

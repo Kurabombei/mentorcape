@@ -1,0 +1,26 @@
+<div class="main-container" *ngIf="auth.user | async as user; else guest">
+	<mat-card class="main-card">
+		<mat-card-header>
+			<h3>{{ user.displayName }}</h3>
+		</mat-card-header>
+		<mat-card-content>
+			<img [src]="user.photoURL" alt="avatar">
+			<p>UID: {{ user.uid }}</p>
+			<p>UID: {{ user.uid }}</p>
+			<p *ngIf="user.favoriteColor">Favorite color: {{ user.favoriteColor }}</p>
+		</mat-card-content>
+		<mat-card-actions>
+			<button mat-stroked-button (click)="afAuth.signOut()">Logout</button>
+
+		</mat-card-actions>
+	</mat-card>
+</div>
+
+<ng-template #guest>
+	<h3>You are currently not logged in.</h3>
+	<p>Proceed with login or signup procedure to continue...</p>
+
+	<button mat-raised-button appGoogleSignin>
+		<img src="/assets/icons/google-logo.svg"/> with Google
+	</button>
+</ng-template>

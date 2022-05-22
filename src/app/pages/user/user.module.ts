@@ -8,6 +8,7 @@ import {SharedModule} from "../../shared/shared.module";
 import { LoginPageComponent } from './login-page/login-page.component';
 import { GoogleSigninDirective } from './google-signin.directive';
 import { EmailLoginComponent } from './email-login/email-login.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { EmailLoginComponent } from './email-login/email-login.component';
     LoginPageComponent,
     GoogleSigninDirective,
     EmailLoginComponent,
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,

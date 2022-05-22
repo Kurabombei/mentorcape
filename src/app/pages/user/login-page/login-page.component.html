@@ -1,20 +1,18 @@
-<div *ngIf="!(afAuth.authState | async)">
-  <h1>Login</h1>
+<div class="main-container">
+	<div *ngIf="!(afAuth.authState | async)">
+		<app-email-login></app-email-login>
+	</div>
 
-  <button mat-raised-button appGoogleSignin>
-    <img src="/assets/icons/google-logo.svg" /> Login with Google
-  </button>
-
-  <span>OR</span>
-
-  <app-email-login></app-email-login>
-
-</div>
-
-<div *ngIf="afAuth.authState | async as user" class="logout">
-  <p>
-    Logged in as <strong>{{ user.email }}</strong>
-  </p>
-
-  <button mat-stroked-button (click)="afAuth.signOut()">Logout</button>
+	<div *ngIf="afAuth.authState | async as user" class="logout">
+		<div class="main-container">
+			<mat-card class="main-card">
+				<mat-card-content>
+					<p>Logged in as <strong>{{ user.email }}</strong></p>
+				</mat-card-content>
+				<mat-card-actions>
+					<button mat-stroked-button (click)="afAuth.signOut()">Logout</button>
+				</mat-card-actions>
+			</mat-card>
+		</div>
+	</div>
 </div>

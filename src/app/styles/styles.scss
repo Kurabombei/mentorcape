@@ -4,65 +4,184 @@
 
 @import "fonts";
 @import "colors";
+@import "animations";
+@import "mixins";
 
 $custom-typography: mat.define-typography-config(
-  $font-family: 'Rubik'
+	$font-family: 'Rubik'
 );
 
 @include mat.core($custom-typography);
 
 $custom-orange: (
-  50 : #fdeee7,
-  100 : #f9d4c2,
-  200 : #f5b79a,
-  300 : #f19a71,
-  400 : #ee8452,
-  500 : #eb6e34,
-  600 : #e9662f,
-  700 : #e55b27,
-  800 : #e25121,
-  900 : #dd3f15,
-  A100 : #ffffff,
-  A200 : #ffe0da,
-  A400 : #ffb6a7,
-  A700 : #ffa28d,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
+	50 : #fdeee7,
+	100 : #f9d4c2,
+	200 : #f5b79a,
+	300 : #f19a71,
+	400 : #ee8452,
+	500 : #eb6e34,
+	600 : #e9662f,
+	700 : #e55b27,
+	800 : #e25121,
+	900 : #dd3f15,
+	A100 : #ffffff,
+	A200 : #ffe0da,
+	A400 : #ffb6a7,
+	A700 : #ffa28d,
+	contrast: (
+		50 : #000000,
+		100 : #000000,
+		200 : #000000,
+		300 : #000000,
+		400 : #000000,
+		500 : #000000,
+		600 : #000000,
+		700 : #ffffff,
+		800 : #ffffff,
+		900 : #ffffff,
+		A100 : #000000,
+		A200 : #000000,
+		A400 : #000000,
+		A700 : #000000,
+	)
 );
 
 
-
 $mentocape-primary: mat.define-palette($custom-orange);
-$mentocape-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$mentocape-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $mentocape-warn: mat.define-palette(mat.$red-palette);
 
 
-$mentocape-theme: mat.define-dark-theme((
-  color: (
-    primary: $mentocape-primary,
-    accent: $mentocape-accent,
-    warn: $mentocape-warn,
-  )
+$mentocape-dark-theme: mat.define-dark-theme((
+	color: (
+		primary: $mentocape-primary,
+		accent: $mentocape-accent,
+		warn: $mentocape-warn,
+	)
 ));
 
-@include mat.all-component-themes($mentocape-theme);
+$mentocape-light-theme: mat.define-light-theme((
+	color: (
+		primary: $mentocape-primary,
+		accent: $mentocape-accent,
+		warn: $mentocape-warn,
+	)
+));
 
+@include mat.all-component-themes($mentocape-dark-theme);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: "Rubik", "Roboto", sans-serif; }
+// Global styles
+
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: "Rubik", "Roboto", sans-serif;
+}
+
+.theme-dark {
+	@include mat.all-component-themes($mentocape-dark-theme);
+}
+
+.theme-light {
+	@include mat.all-component-themes($mentocape-light-theme);
+}
+
+.logo__image:hover {
+	animation: color-rotate 1s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+.m-t-0_5 {
+	margin-top: 0.5rem;
+}
+
+.m-t-1 {
+	margin-top: 1rem;
+}
+
+.m-t-1_25 {
+	margin-top: 1.25rem;
+}
+
+.m-t-1_5 {
+	margin-top: 1.5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	max-width: 38.25rem;
+	font-weight: bold;
+	margin: 0;
+
+	span {
+		text-transform: uppercase;
+		@include gradient-text(cyan, lime);
+	}
+}
+
+h1 {
+	font-size: 3rem;
+	line-height: 4rem;
+}
+
+h2 {
+	font-size: 3rem;
+	line-height: 3.5rem;
+}
+
+h3 {
+	font-size: 2.5rem;
+	line-height: 3rem;
+}
+
+h4 {
+	font-size: 2rem;
+	line-height: 2.5rem;
+}
+
+h5 {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+
+.main-container {
+	max-width: 73.125rem; // 12 columns (width: 4.375rem; margin: 1.875rem;)
+	margin: 0 auto;
+	width: 100%;
+
+	@media screen and(max-width: 1440px) {
+	}
+}
+
+.main-card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&__grey {
+		background: rgb(0, 14, 180);
+	}
+}
+
+.media-container {
+	display: flex;
+	flex-flow: column;
+	padding-top: 104px;
+	align-items: center;
+	height: 35rem;
+
+	@media screen and (max-width: 1440px) {
+		margin-top: 0;
+	}
+
+	p {
+		max-width: 38.25rem;
+		margin: 1rem 0 0;
+		line-height: 1.5rem;
+	}
+}
