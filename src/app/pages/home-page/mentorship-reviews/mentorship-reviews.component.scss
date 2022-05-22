@@ -1,5 +1,28 @@
+@import 'src/app/styles/colors';
+
 .media-container {
-	blockquote {
-		font-size: 2rem;
+	.mentee-info {
+
+		&__quote {
+			font-size: 2rem;
+		}
+
+		&__footer {
+			font-size: 1.25rem;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+
+			& > div {
+				margin-right: 1rem;
+			}
+		}
+
+		&__avatar {
+			width: 88px;
+			padding: 2px;
+			border: 6px solid $accent;
+			border-radius: 50%;
+		}
 	}
 }

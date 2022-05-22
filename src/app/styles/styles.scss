@@ -169,11 +169,13 @@ h5 {
 }
 
 .media-container {
+	box-shadow: inset 0 -1px #dfe2e5, inset 0 1px #dfe2e5;
+	padding: 64px 96px;
+
 	display: flex;
 	flex-flow: column;
-	padding-top: 104px;
 	align-items: center;
-	height: 35rem;
+	height: fit-content;
 
 	@media screen and (max-width: 1440px) {
 		margin-top: 0;

@@ -6,6 +6,7 @@ import {HeroBlockComponent} from './hero-block/hero-block.component';
 import {FindMentorComponent} from './find-mentor/find-mentor.component';
 import {OurMentorsComponent} from './our-mentors/our-mentors.component';
 import {MentorshipReviewsComponent} from './mentorship-reviews/mentorship-reviews.component';
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {MentorshipReviewsComponent} from './mentorship-reviews/mentorship-review
 	],
 	imports: [
 		CommonModule,
-		HomePageRoutingModule
+		HomePageRoutingModule,
+		SharedModule
 	]
 })
 export class HomePageModule {

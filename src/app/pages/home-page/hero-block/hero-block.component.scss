@@ -1,0 +1,13 @@
+
+.hero {
+	display: flex;
+	align-items: center;
+
+	&__content {
+
+	}
+
+	&__image {
+		max-width: 584px;
+	}
+}
