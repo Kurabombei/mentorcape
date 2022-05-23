@@ -9,6 +9,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { GoogleSigninDirective } from './google-signin.directive';
 import { EmailLoginComponent } from './email-login/email-login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { BecomeMentorComponent } from './user-profile/become-mentor/become-mentor.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     GoogleSigninDirective,
     EmailLoginComponent,
     UserProfileComponent,
+    BecomeMentorComponent,
   ],
   imports: [
     CommonModule,

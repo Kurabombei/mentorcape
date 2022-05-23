@@ -1,0 +1,16 @@
+@import "~src/app/styles/colors";
+
+.main-container {
+	padding: 64px 96px;
+}
+
+.user-card {
+	font-size: 1.25rem;
+
+	&__image {
+		max-width: 128px;
+		padding: 2px;
+		border: 6px solid $accent;
+		border-radius: 50%;
+	}
+}

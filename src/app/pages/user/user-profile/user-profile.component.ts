@@ -8,6 +8,7 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 	styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+	public isEdited: boolean = false;
 
 	constructor(public auth: AuthService, public afAuth: AngularFireAuth) {
 	}
@@ -15,4 +16,16 @@ export class UserProfileComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
+	startEdit() {
+		this.isEdited = true;
+	}
+
+	cancelEdit() {
+		this.isEdited = false;
+	}
+
+	save() {
+		// save edited info
+		this.cancelEdit();
+	}
 }
