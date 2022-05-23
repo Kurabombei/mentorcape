@@ -11,6 +11,10 @@
 
 			<a mat-list-item routerLink="/" (click)="drawer.close()">Home</a>
 			<a mat-list-item routerLink="/kanban" (click)="drawer.close()">🍱 My tasks</a>
+
+			<a mat-list-item routerLink="/card-grid/students" (click)="drawer.close()">⚡ Students</a>
+			<a mat-list-item routerLink="/card-grid/mentors" (click)="drawer.close()">⚡ Mentors</a>
+
 			<a mat-list-item routerLink="/faq" (click)="drawer.close()">⚡ FAQ</a>
 			<a mat-list-item routerLink="/about-us" (click)="drawer.close()">⚡ About MentorCape</a>
 		</mat-nav-list>
@@ -37,30 +41,32 @@
 			<!--      <span class="fill-space"></span>-->
 			<div *ngIf="!(isHandset$ | async)">
 				<a mat-button routerLink="/kanban">🍱 My tasks</a>
-				<a mat-button routerLink="/faq">⚡ FAQ</a>
-				<a mat-button routerLink="/about-us">⚡ About MentorCape</a>
+				<a mat-button routerLink="/card-grid/students">⚡ All students</a>
+				<a mat-button routerLink="/card-grid/mentors">⚡ All mentors</a>
 
-				<span>Theme </span>
+				<a mat-button routerLink="/login" *ngIf="!(this.auth.user | async)">🔑 Login</a>
+				<a mat-button routerLink="/user-profile" *ngIf="this.auth.user | async">🐱‍👤 My profile</a>
 				<mat-slide-toggle
-					class="example-margin"
+					class="slide-toggle"
 					[color]="'accent'"
 					(change)="onDarkModeSwitch($event)">
 				</mat-slide-toggle>
 
-
-				<a mat-button routerLink="/login" *ngIf="!(this.auth.user | async)">🔑 Login</a>
-				<a mat-button routerLink="/user-profile" *ngIf="this.auth.user | async">🐱‍👤 My profile</a>
-
 				<button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!(isHandset$ | async)"
-								aria-label="Example icon-button with a menu">
+								aria-label="Icon-button with a menu">
 					<mat-icon>more_vert</mat-icon>
 				</button>
 
 				<mat-menu #menu="matMenu">
-					<a mat-menu-item href="">
+					<span mat-menu-item>
 						<i>🌗</i>
 						<span>Change theme</span>
-					</a>
+						<mat-slide-toggle
+							class="slide-toggle"
+							[color]="'accent'"
+							(change)="onDarkModeSwitch($event)">
+						</mat-slide-toggle>
+					</span>
 					<a mat-menu-item href="">
 						<i>🐞</i>
 						<span>Submit a bug</span>

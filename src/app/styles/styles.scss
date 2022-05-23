@@ -47,6 +47,40 @@ $custom-orange: (
 );
 
 
+$custom-cyan: (
+	50 : #F6FFFE,
+	100 : #DDFFFE,
+	200 : #C4FFFD,
+	300 : #ABFFFC,
+	400 : #93E7E5,
+	500 : #7ACAC8,
+	600 : #62ADAB,
+	700 : #4D908E,
+	800 : #3A7371,
+	900 : #285654,
+	A100 : #ADFFF3,
+	A200 : #7AFFEC,
+	A400 : #47FFE4,
+	A700 : #2DFFE0,
+	contrast: (
+		50 : #000000,
+		100 : #000000,
+		200 : #000000,
+		300 : #000000,
+		400 : #000000,
+		500 : #000000,
+		600 : #000000,
+		700 : #ffffff,
+		800 : #ffffff,
+		900 : #ffffff,
+		A100 : #000000,
+		A200 : #000000,
+		A400 : #000000,
+		A700 : #000000,
+	)
+);
+
+
 $mentocape-primary: mat.define-palette($custom-orange);
 $mentocape-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
 
@@ -92,7 +126,7 @@ body {
 }
 
 .logo__image:hover {
-	animation: color-rotate 1s;
+	animation: color-rotate 2s;
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
 }
@@ -120,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
 
 	span {
 		text-transform: uppercase;
-		@include gradient-text(cyan, lime);
+		@include gradient-text(#ff4b4b, #008cff);
 	}
 }
 

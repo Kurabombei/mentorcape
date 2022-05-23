@@ -13,6 +13,9 @@ const routes: Routes = [
 		path: 'login', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
 	},
 	{
+		path: 'card-grid', loadChildren: () => import('./pages/card-grid/card-grid.module').then(m => m.CardGridModule)
+	},
+	{
 		path: 'kanban',
 		loadChildren: () => import('./pages/kanban/kanban.module').then(m => m.KanbanModule),
 		canActivate: [AuthGuard]
