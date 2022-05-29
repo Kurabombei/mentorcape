@@ -1,0 +1,19 @@
+@import "~src/app/styles/colors";
+
+.step-list {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(200px, 1fr));
+	gap: 28px;
+	text-align: center;
+
+	.step-element {
+		&__title {
+			color: #285654;
+		}
+
+		&__image {
+			border-radius: 50%;
+			background: $white;
+		}
+	}
+}
