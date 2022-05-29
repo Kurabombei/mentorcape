@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from "./pages/user/auth.guard";
 import {UserProfileComponent} from "./pages/user/user-profile/user-profile.component";
+import {MentorFormComponent} from "./pages/user/user-profile/mentor-form/mentor-form.component";
 
 const routes: Routes = [
 	{
@@ -9,6 +10,7 @@ const routes: Routes = [
 		loadChildren: () => import('./pages/home-page/home-page.module').then(m => m.HomePageModule)
 	},
 	{path: 'user-profile', component: UserProfileComponent},
+	{path: 'become-mentor', component: MentorFormComponent},
 	{
 		path: 'login', loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)
 	},

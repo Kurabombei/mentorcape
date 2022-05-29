@@ -1,0 +1,15 @@
+
+.card {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	width: 100%;
+	padding: 1.5rem;
+
+	&__avatar {
+		width: 88px;
+		padding: 2px;
+		border: 6px solid coral;
+		border-radius: 50%;
+	}
+}

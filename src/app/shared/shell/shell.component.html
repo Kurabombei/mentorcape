@@ -2,21 +2,23 @@
 
 	<!-- SIDENAV -->
 
-	<mat-sidenav #drawer class="sidenav" fixedInViewport
-							 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+	<mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
 							 [mode]="(isHandset$ | async) ? 'over' : 'side'"
-							 [opened]="false">
+							 [opened]="false"
+							 class="sidenav"
+							 fixedInViewport>
 		<mat-toolbar>Menu</mat-toolbar>
 		<mat-nav-list>
+			<a (click)="drawer.close()" mat-list-item routerLink="/">Home</a>
+			<ng-container *ngIf="this.auth.user | async">
+				<a (click)="drawer.close()" mat-list-item routerLink="/kanban">🍱 My tasks</a>
 
-			<a mat-list-item routerLink="/" (click)="drawer.close()">Home</a>
-			<a mat-list-item routerLink="/kanban" (click)="drawer.close()">🍱 My tasks</a>
+				<a (click)="drawer.close()" mat-list-item routerLink="/card-grid/students">⚡ Students</a>
+				<a (click)="drawer.close()" mat-list-item routerLink="/card-grid/mentors">⚡ Mentors</a>
+			</ng-container>
 
-			<a mat-list-item routerLink="/card-grid/students" (click)="drawer.close()">⚡ Students</a>
-			<a mat-list-item routerLink="/card-grid/mentors" (click)="drawer.close()">⚡ Mentors</a>
-
-			<a mat-list-item routerLink="/faq" (click)="drawer.close()">⚡ FAQ</a>
-			<a mat-list-item routerLink="/about-us" (click)="drawer.close()">⚡ About MentorCape</a>
+			<a (click)="drawer.close()" mat-list-item routerLink="/faq">⚡ FAQ</a>
+			<a (click)="drawer.close()" mat-list-item routerLink="/about-us">⚡ About MentorCape</a>
 		</mat-nav-list>
 	</mat-sidenav>
 	<mat-sidenav-content>
@@ -25,35 +27,37 @@
 
 		<mat-toolbar class="top-toolbar">
 			<button
-				type="button"
+				(click)="drawer.toggle()"
+				*ngIf="isHandset$ | async"
 				aria-label="Toggle sidenav"
 				mat-icon-button
-				(click)="drawer.toggle()"
-				*ngIf="isHandset$ | async">
+				type="button">
 
 
 				<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
 			</button>
 			<a mat-button routerLink="/">
-				<img class="logo__image" routerLink="/" src="assets/icons/logo.svg" alt="Mentor Cape"/>
+				<img alt="Mentor Cape" class="logo__image" routerLink="/" src="assets/icons/logo.svg"/>
 			</a>
 
 			<!--      <span class="fill-space"></span>-->
 			<div *ngIf="!(isHandset$ | async)">
-				<a mat-button routerLink="/kanban">🍱 My tasks</a>
-				<a mat-button routerLink="/card-grid/students">⚡ All students</a>
-				<a mat-button routerLink="/card-grid/mentors">⚡ All mentors</a>
+				<ng-container *ngIf="this.auth.user | async">
+					<a mat-button routerLink="/kanban">🍱 My tasks</a>
+					<a mat-button routerLink="/card-grid/students">⚡ All students</a>
+					<a mat-button routerLink="/card-grid/mentors">⚡ All mentors</a>
+					<a *ngIf="this.auth.user | async" mat-button routerLink="/user-profile">🐱‍👤 My profile</a>
+				</ng-container>
 
-				<a mat-button routerLink="/login" *ngIf="!(this.auth.user | async)">🔑 Login</a>
-				<a mat-button routerLink="/user-profile" *ngIf="this.auth.user | async">🐱‍👤 My profile</a>
+				<a *ngIf="!(this.auth.user | async)" mat-button routerLink="/login">🔑 Login</a>
 				<mat-slide-toggle
-					class="slide-toggle"
+					(change)="onDarkModeSwitch($event)"
 					[color]="'accent'"
-					(change)="onDarkModeSwitch($event)">
+					class="slide-toggle">
 				</mat-slide-toggle>
 
-				<button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!(isHandset$ | async)"
-								aria-label="Icon-button with a menu">
+				<button *ngIf="!(isHandset$ | async)" [matMenuTriggerFor]="menu" aria-label="Icon-button with a menu"
+								mat-icon-button>
 					<mat-icon>more_vert</mat-icon>
 				</button>
 
@@ -62,12 +66,12 @@
 						<i>🌗</i>
 						<span>Change theme</span>
 						<mat-slide-toggle
-							class="slide-toggle"
+							(change)="onDarkModeSwitch($event)"
 							[color]="'accent'"
-							(change)="onDarkModeSwitch($event)">
+							class="slide-toggle">
 						</mat-slide-toggle>
 					</span>
-					<a mat-menu-item href="">
+					<a href="" mat-menu-item>
 						<i>🐞</i>
 						<span>Submit a bug</span>
 					</a>

@@ -10,6 +10,7 @@ import { GoogleSigninDirective } from './google-signin.directive';
 import { EmailLoginComponent } from './email-login/email-login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BecomeMentorComponent } from './user-profile/become-mentor/become-mentor.component';
+import { MentorFormComponent } from './user-profile/mentor-form/mentor-form.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { BecomeMentorComponent } from './user-profile/become-mentor/become-mento
     EmailLoginComponent,
     UserProfileComponent,
     BecomeMentorComponent,
+    MentorFormComponent,
   ],
   imports: [
     CommonModule,

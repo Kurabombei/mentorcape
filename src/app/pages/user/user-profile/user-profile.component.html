@@ -1,23 +1,23 @@
-<section class="main-container" *ngIf="auth.user | async as user; else guest">
+<section *ngIf="auth.user | async as user; else guest" class="main-container">
 	<mat-card class="main-card user-card">
 		<mat-card-header>
 			<h3>{{ user.displayName }}</h3>
 		</mat-card-header>
 		<mat-card-content>
-			<img [src]="user.photoURL" class="user-card__image" alt="avatar">
+			<img [src]="user.photoURL" alt="avatar" class="user-card__image">
 			<p>email: {{ user.email }}</p>
 			<p>UID: {{ user.uid }}</p>
 			<p *ngIf="user.favoriteColor">Favorite color: {{ user.favoriteColor }}</p>
 		</mat-card-content>
 		<mat-card-actions align="end">
 			<ng-container *ngIf="!isEdited; else editButtons">
-				<button mat-stroked-button color="warn" (click)="afAuth.signOut()">Logout</button>
-				<button mat-flat-button color="accent" (click)="startEdit()">Edit</button>
+				<button (click)="afAuth.signOut()" color="warn" mat-stroked-button>Logout</button>
+				<button (click)="startEdit()" color="accent" mat-flat-button>Edit</button>
 			</ng-container>
 
 			<ng-template #editButtons>
-				<button mat-stroked-button color="warn" (click)="cancelEdit()">Cancel</button>
-				<button mat-raised-button color="accent" (click)="save()">Save</button>
+				<button (click)="cancelEdit()" color="warn" mat-stroked-button>Cancel</button>
+				<button (click)="save()" color="accent" mat-raised-button>Save</button>
 			</ng-template>
 		</mat-card-actions>
 	</mat-card>
@@ -25,10 +25,14 @@
 </section>
 
 <ng-template #guest>
-	<h3>You are currently not logged in.</h3>
-	<p>Proceed with login or signup procedure to continue...</p>
+	<div class="main-container">
+		<div class="media-container">
+			<h3>You are currently not logged in.</h3>
+			<p>Proceed with login or signup procedure to continue...</p>
 
-	<button mat-raised-button appGoogleSignin>
-		<img src="/assets/icons/google-logo.svg"/> with Google
-	</button>
+			<button appGoogleSignin mat-raised-button>
+				<img src="/assets/icons/google-logo.svg"/> with Google
+			</button>
+		</div>
+	</div>
 </ng-template>

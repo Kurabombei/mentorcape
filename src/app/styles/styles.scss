@@ -185,7 +185,7 @@ h5 {
 
 .main-container {
 	max-width: 73.125rem; // 12 columns (width: 4.375rem; margin: 1.875rem;)
-	margin: 0 auto;
+	margin: 4rem auto;
 	width: 100%;
 
 	@media screen and(max-width: 1440px) {
@@ -221,3 +221,13 @@ h5 {
 		line-height: 1.5rem;
 	}
 }
+
+
+.card-list {
+	display: grid;
+
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 10px;
+	padding: 3rem;
+}
+

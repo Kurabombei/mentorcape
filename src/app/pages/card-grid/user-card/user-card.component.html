@@ -1,0 +1,26 @@
+<mat-card class="card">
+	<mat-card-header>
+		<img *ngIf="user.photoURL === ''" [src]="'https://robohash.org/' + user.uid" alt="No avatar provided"
+				 class="card__avatar">
+		<img *ngIf="user.photoURL !== ''" [src]="user.photoURL" alt="No avatar provided" class="card__avatar">
+		<h2 class="card__name">{{user.displayName}}</h2>
+	</mat-card-header>
+	<mat-card-content>
+		<ng-container *ngIf="isMentor; else studentContent">
+			<p class="card__email">Email: {{user.email}}</p>
+			<p class="card__email">Age: {{user.age}}</p>
+			<p class="card__email">Location: {{user.location}}</p>
+			<p class="card__email">Languages: {{user.languages}}</p>
+			<p class="card__email">Students: {{user.students}}</p>
+		</ng-container>
+
+		<ng-template #studentContent>
+			<p class="card__email">Email: {{user.email}}</p>
+			<p class="card__email">Age: {{user.age}}</p>
+			<p class="card__email">Location: {{user.location}}</p>
+			<p class="card__email">Languages: {{user.languages}}</p>
+			<p class="card__email">Mentors: {{user.mentors}}</p>
+		</ng-template>
+
+	</mat-card-content>
+</mat-card>

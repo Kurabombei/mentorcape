@@ -29,19 +29,10 @@ export class AuthService {
 		return await this.afAuth.signInWithEmailAndPassword(email, password);
 	}
 
-	async createUserWithEmailAndPassword(email: string, password: string) {
-		return await this.afAuth.createUserWithEmailAndPassword(email, password).then(cred => {
-			console.log('cred', cred);
-			const newUser = new User();
-
-			if (cred) {
-				if (cred.user?.email) {
-					newUser.email = cred.user?.email;
-				}
-
-				this.db.collection('users').doc(cred.user?.uid).set(newUser);
-			}
-		}, err => console.log('Error. Could not create User.', err));
+	async createUserWithEmailAndPassword(email: string, password: string, displayName: string) {
+		return await this.afAuth.createUserWithEmailAndPassword(email, password).then((credential) => {
+			this.updateUserData({...credential.user, displayName: displayName, photoURL: ''});
+		});
 	}
 
 	async sendPasswordResetEmail(email: string) {
@@ -51,7 +42,9 @@ export class AuthService {
 	signInWithPopup() {
 		return this.afAuth.signInWithPopup(new firebaseAuth.GoogleAuthProvider())
 			.then((credential) => {
-				this.updateUserData(credential.user);
+				if (credential.additionalUserInfo?.isNewUser) {
+					this.updateUserData(credential.user);
+				}
 			});
 	}
 
@@ -62,7 +55,8 @@ export class AuthService {
 			uid: user.uid,
 			email: user.email,
 			displayName: user.displayName,
-			photoURL: user.photoURL
+			photoURL: user.photoURL,
+			isMentor: false
 		}
 
 		return userRef.set(newUser);

@@ -3,35 +3,53 @@
 		<div *ngIf="isSignup">
 			<h3>Create Account</h3>
 
-			<button mat-stroked-button (click)="changeType('login')">
+			<button (click)="changeType('login')" mat-stroked-button>
 				Returning user?
 			</button>
 		</div>
 
 		<div *ngIf="isLogin">
 			<h3>Sign In</h3>
-			<button mat-raised-button appGoogleSignin>
+			<button appGoogleSignin mat-raised-button>
 				<img src="/assets/icons/google-logo.svg"/> with Google
 			</button>
-			<button size="small" mat-stroked-button (click)="changeType('signup')">
+			<button (click)="changeType('signup')" mat-stroked-button size="small">
 
 			</button>
 		</div>
 
 		<div *ngIf="isPasswordReset">
 			<h3>Reset Password</h3>
-			<button size="small" mat-button (click)="changeType('login')">Back</button>
+			<button (click)="changeType('login')" mat-button size="small">Back</button>
 		</div>
 	</mat-card-content>
 
-	<form [formGroup]="form" (ngSubmit)="onSubmit()">
-		<mat-form-field [color]="email!.valid && 'accent'">
+	<form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+
+		<mat-form-field *ngIf="isSignup" [color]="email!.valid && 'accent'">
+			<mat-label for="displayName">Display name:</mat-label>
 			<input
-				matInput
-				formControlName="email"
-				type="email"
-				placeholder="Email"
 				autocomplete="off"
+				formControlName="displayName"
+				matInput
+				placeholder="Elon Musk"
+				type="text"
+			/>
+
+			<mat-error *ngIf="email!.invalid && email!.dirty">
+				You must enter a hero-like display name!
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field [color]="email!.valid && 'accent'">
+			<mat-label for="email">Email:</mat-label>
+			<input
+				autocomplete="off"
+				formControlName="email"
+				matInput
+				placeholder="Email"
+				type="email"
 			/>
 
 			<mat-error *ngIf="email!.invalid && email!.dirty">
@@ -39,13 +57,14 @@
 			</mat-error>
 		</mat-form-field>
 
-		<mat-form-field [color]="email!.valid && 'accent'" *ngIf="!isPasswordReset">
+		<mat-form-field *ngIf="!isPasswordReset" [color]="email!.valid && 'accent'">
+			<mat-label for="password">Password:</mat-label>
 			<input
-				matInput
-				formControlName="password"
-				type="password"
-				placeholder="Password"
 				autocomplete="off"
+				formControlName="password"
+				matInput
+				placeholder="Password"
+				type="password"
 			/>
 
 			<mat-error *ngIf="password!.invalid && password!.dirty">
@@ -54,15 +73,17 @@
 		</mat-form-field>
 
 		<mat-form-field
-			[color]="passwordDoesMatch ? 'accent' : 'warn'"
 			*ngIf="isSignup"
+			[color]="passwordDoesMatch ? 'accent' : 'warn'"
 		>
+			<mat-label for="passwordConfirm">Password confirm:</mat-label>
+
 			<input
-				matInput
-				formControlName="passwordConfirm"
-				type="password"
-				placeholder="Confirm password"
 				autocomplete="off"
+				formControlName="passwordConfirm"
+				matInput
+				placeholder="Confirm password"
+				type="password"
 			/>
 
 			<mat-error *ngIf="passwordConfirm!.dirty && !passwordDoesMatch">
@@ -70,32 +91,33 @@
 			</mat-error>
 		</mat-form-field>
 
+
 		<mat-error class="server-error">{{ serverMessage }}</mat-error>
 
 		<button
 			*ngIf="isPasswordReset"
+			[disabled]="loading"
 			mat-stroked-button
 			type="submit"
-			[disabled]="loading"
 		>
 			Send Reset Email
 		</button>
 
 		<button
 			*ngIf="!isPasswordReset"
-			mat-raised-button
-			color="accent"
-			type="submit"
 			[disabled]="form.invalid || !passwordDoesMatch || loading"
+			color="accent"
+			mat-raised-button
+			type="submit"
 		>
 			Submit
 		</button>
 	</form>
 
 	<button
-		mat-button
-		*ngIf="isLogin && !isPasswordReset"
 		(click)="changeType('reset')"
+		*ngIf="isLogin && !isPasswordReset"
+		mat-button
 	>
 		Forgot password?
 	</button>
