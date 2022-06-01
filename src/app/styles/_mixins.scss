@@ -1,3 +1,12 @@
+@import '~@angular/material/theming';
+
+@mixin mc-parent-theme($theme) {
+	$mentocape-primary: mat($theme, primary);
+	$mentocape-accent: mat-get($theme, accent);
+	$mentocape-foreground: mat-get($theme, foreground);
+	$mentocape-background: mat-get($theme, background);
+}
+
 @mixin gradient-text($color-from: blueviolet, $color-to: blue) {
 	background: linear-gradient(90deg, $color-from 0%, $color-to 100%);
 	-webkit-background-clip: text;

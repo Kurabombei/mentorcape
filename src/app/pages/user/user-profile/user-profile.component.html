@@ -1,13 +1,32 @@
 <section *ngIf="auth.user | async as user; else guest" class="main-container">
 	<mat-card class="main-card user-card">
-		<mat-card-header>
-			<h3>{{ user.displayName }}</h3>
-		</mat-card-header>
+		<div class="user-card__header">
+			<div class="user-card__title">
+				<img [src]="user.photoURL" alt="avatar" class="user-card__image" mat-card-avatar>
+				<mat-card-title>{{user.displayName}}</mat-card-title>
+				<mat-card-subtitle *ngIf="!!user.position">{{user.position}}</mat-card-subtitle>
+			</div>
+			<div class="user-card__uid">UID: {{ user.uid }}</div>
+		</div>
 		<mat-card-content>
-			<img [src]="user.photoURL" alt="avatar" class="user-card__image">
 			<p>email: {{ user.email }}</p>
-			<p>UID: {{ user.uid }}</p>
 			<p *ngIf="user.favoriteColor">Favorite color: {{ user.favoriteColor }}</p>
+
+			<ng-container *ngIf="user.isMentor; else studentContent">
+				<p class="card__email">Email: {{user.email}}</p>
+				<p class="card__email">Age: {{user.age}}</p>
+				<p class="card__email">Location: {{user.location}}</p>
+				<p class="card__email">Languages: {{user.languages}}</p>
+				<p class="card__email">Students: {{user.students}}</p>
+			</ng-container>
+
+			<ng-template #studentContent>
+				<p class="card__email">Email: {{user.email}}</p>
+				<p class="card__email">Age: {{user.age}}</p>
+				<p class="card__email">Location: {{user.location}}</p>
+				<p class="card__email">Languages: {{user.languages}}</p>
+				<p class="card__email">Mentors: {{user.mentors}}</p>
+			</ng-template>
 		</mat-card-content>
 		<mat-card-actions align="end">
 			<ng-container *ngIf="!isEdited; else editButtons">

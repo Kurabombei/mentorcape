@@ -3,8 +3,9 @@ export class User {
 	email: string;
 
 	isMentor: boolean;
-	
+
 	displayName?: string;
+	position?: string;
 	location?: string;
 	photoURL?: string;
 	age?: number;

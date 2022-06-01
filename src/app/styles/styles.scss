@@ -1,112 +1,41 @@
 @use '@angular/material' as mat;
 
-@include mat.core();
-
 @import "fonts";
 @import "colors";
 @import "animations";
 @import "mixins";
-
-$custom-typography: mat.define-typography-config(
-	$font-family: 'Rubik'
-);
-
-@include mat.core($custom-typography);
-
-$custom-orange: (
-	50 : #fdeee7,
-	100 : #f9d4c2,
-	200 : #f5b79a,
-	300 : #f19a71,
-	400 : #ee8452,
-	500 : #eb6e34,
-	600 : #e9662f,
-	700 : #e55b27,
-	800 : #e25121,
-	900 : #dd3f15,
-	A100 : #ffffff,
-	A200 : #ffe0da,
-	A400 : #ffb6a7,
-	A700 : #ffa28d,
-	contrast: (
-		50 : #000000,
-		100 : #000000,
-		200 : #000000,
-		300 : #000000,
-		400 : #000000,
-		500 : #000000,
-		600 : #000000,
-		700 : #ffffff,
-		800 : #ffffff,
-		900 : #ffffff,
-		A100 : #000000,
-		A200 : #000000,
-		A400 : #000000,
-		A700 : #000000,
-	)
-);
-
-
-$custom-cyan: (
-	50 : #F6FFFE,
-	100 : #DDFFFE,
-	200 : #C4FFFD,
-	300 : #ABFFFC,
-	400 : #93E7E5,
-	500 : #7ACAC8,
-	600 : #62ADAB,
-	700 : #4D908E,
-	800 : #3A7371,
-	900 : #285654,
-	A100 : #ADFFF3,
-	A200 : #7AFFEC,
-	A400 : #47FFE4,
-	A700 : #2DFFE0,
-	contrast: (
-		50 : #000000,
-		100 : #000000,
-		200 : #000000,
-		300 : #000000,
-		400 : #000000,
-		500 : #000000,
-		600 : #000000,
-		700 : #ffffff,
-		800 : #ffffff,
-		900 : #ffffff,
-		A100 : #000000,
-		A200 : #000000,
-		A400 : #000000,
-		A700 : #000000,
-	)
-);
-
-
-$mentocape-primary: mat.define-palette($custom-orange);
-$mentocape-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$mentocape-warn: mat.define-palette(mat.$red-palette);
-
-
-$mentocape-dark-theme: mat.define-dark-theme((
-	color: (
-		primary: $mentocape-primary,
-		accent: $mentocape-accent,
-		warn: $mentocape-warn,
-	)
-));
-
-$mentocape-light-theme: mat.define-light-theme((
-	color: (
-		primary: $mentocape-primary,
-		accent: $mentocape-accent,
-		warn: $mentocape-warn,
-	)
-));
-
-@include mat.all-component-themes($mentocape-dark-theme);
+@import "theme";
 
 // Global styles
+
+// DARK/LIGHT styles
+.theme-dark {
+	@include mat.all-component-themes($mentocape-dark-theme);
+	background-color: $dark-blue;
+	color: $light-blue;
+
+	.primary-text {
+		color: mat.get-color-from-palette($mentocape-primary);
+	}
+
+	.accent-text {
+		color: mat.get-color-from-palette($mentocape-accent);
+	}
+}
+
+.theme-light {
+	@include mat.all-component-themes($mentocape-light-theme);
+	background-color: $light-blue;
+
+	.primary-text {
+		color: mat.get-color-from-palette($darkblue);
+	}
+
+	.accent-text {
+		color: mat.get-color-from-palette($mentocape-accent);
+	}
+
+}
 
 html, body {
 	height: 100%;
@@ -115,14 +44,6 @@ html, body {
 body {
 	margin: 0;
 	font-family: "Rubik", "Roboto", sans-serif;
-}
-
-.theme-dark {
-	@include mat.all-component-themes($mentocape-dark-theme);
-}
-
-.theme-light {
-	@include mat.all-component-themes($mentocape-light-theme);
 }
 
 .logo__image:hover {
@@ -222,8 +143,185 @@ h5 {
 .card-list {
 	display: grid;
 
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	gap: 10px;
+	grid-template-columns: repeat(3, minmax(250px, 1fr));
+	gap: 1rem;
 	padding: 3rem;
+}
+
+.default-link {
+	font-weight: 500;
+	color: $accent;
+	cursor: pointer;
+
+	&:hover {
+		color: $second-accent;
+	}
+
+	&--dashed {
+		border-bottom: 1px dashed $second-accent;
+	}
+}
+
+.main-button {
+	background: $white;
+	border: 1px solid $gray;
+	font-weight: 600;
+	height: 2.5rem;
+	padding: 0 1.5rem;
+	box-shadow: 0 1px 1px rgba(32, 36, 46, 0.12);
+	border-radius: 6px;
+	font-size: 0.875rem;
+	color: $main-dark;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	outline: none;
+
+	&:hover {
+		color: #efbc2d;
+		box-shadow: none;
+	}
+
+	svg, img {
+		margin-right: 0.5rem;
+	}
+
+	&--sm {
+		width: fit-content;
+		height: 1.5rem;
+		padding: 0.5rem;
+	}
+
+	&--md {
+		height: 2rem;
+	}
+
+	&--lg {
+		height: 3rem;
+	}
+
+	&--x-lg {
+		height: 4rem;
+	}
+
+	&--light-blue {
+		background-color: $light-blue;
+		color: $white;
+		border: 1px solid $light-blue;
+
+		&:hover {
+			color: $main-dark;
+		}
+	}
+
+	&--active {
+		font-weight: 500;
+
+		&:hover {
+			color: #efbc2d;
+
+			path {
+				fill: #efbc2d;
+			}
+		}
+	}
+
+	&--dark {
+		background-color: $main-dark;
+		color: $white;
+		border: $main-dark;
+	}
+
+	&--delete {
+		&:hover {
+			color: $red;
+		}
+	}
+
+	&--warning {
+		background-color: $red;
+		color: $white;
+		border: 1px solid $red;
+		box-shadow: 0 1px 1px rgba(32, 36, 46, 0.12), 0 2px 8px rgba(213, 66, 56, 0.24);
+
+		&:hover {
+			background-color: $second-red;
+		}
+	}
+
+	&--accent {
+		color: $accent;
+
+		path {
+			fill: $accent;
+		}
+
+		&:hover {
+			color: #efbc2d;
+
+			path {
+				fill: #efbc2d;
+			}
+		}
+	}
+
+	&--success {
+		background-color: $green;
+		color: $white;
+		border: none;
+		box-shadow: 0 1px 1px rgba(32, 36, 46, 0.12), 0 2px 8px rgba(95, 205, 107, 0.24);
+
+		&:hover {
+			background-color: $second-green;
+			color: $white;
+			box-shadow: none;
+		}
+	}
+
+	&--main-filled {
+		background-color: #efbc2d;
+		color: $white;
+		border: 1px solid #efbc2d;
+		box-shadow: 0 1px 1px rgba(32, 36, 46, 0.12), 0 2px 8px rgba(47, 79, 146, 0.24);
+
+		&:hover {
+			background-color: $second-main;
+			color: $white;
+			box-shadow: none;
+		}
+	}
+
+	&--accent-filled {
+		background-color: $accent;
+		color: $white;
+		border: 1px solid $accent;
+
+		&:hover {
+			background-color: $third-accent;
+			color: $white;
+			border: 1px solid $third-accent;
+		}
+	}
+
+	&--main {
+		color: #efbc2d;
+	}
+
+	&[disabled] {
+		background: $second-gray;
+		color: $fourth-gray;
+		cursor: not-allowed;
+		font-weight: 400;
+		box-shadow: none;
+		border: 1px solid transparent;
+		pointer-events: none;
+
+		svg {
+			path {
+				fill: $fourth-gray;
+			}
+		}
+	}
 }
 

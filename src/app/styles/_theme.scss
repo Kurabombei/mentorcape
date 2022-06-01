@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+@import 'palette';
+
+@include mat.core();
+
+$custom-typography: mat.define-typography-config(
+	$font-family: 'Rubik'
+);
+
+@include mat.core($custom-typography);
+
+
+$mentocape-primary: mat.define-palette($orange);
+$mentocape-accent: mat.define-palette($cyan, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$mentocape-warn: mat.define-palette(mat.$red-palette);
+
+$mentorcape-theme-surface: mat.define-palette($orange, 100);
+$mentorcape-theme-background: mat.define-palette($cyan, 100);
+
+
+$mentocape-dark-theme: mat.define-dark-theme((
+	color: (
+		primary: $mentocape-primary,
+		accent: $mentocape-accent,
+		warn: $mentocape-warn,
+	)
+));
+
+$mentocape-light-theme: mat.define-light-theme((
+	color: (
+		primary: $mentocape-primary,
+		accent: $mentocape-accent,
+		warn: $mentocape-warn,
+	)
+));
+
+@include mat.all-component-themes($mentocape-dark-theme);

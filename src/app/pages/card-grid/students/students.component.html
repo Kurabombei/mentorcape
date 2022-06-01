@@ -2,7 +2,9 @@
 	<!--	Filters will be here-->
 </header>
 <mat-divider></mat-divider>
-<section class="card-list">
-	<app-user-card *ngFor="let student of students" [isMentor]="false" [user]="student">
-	</app-user-card>
+<section class="main-container">
+	<article class="card-list">
+		<app-user-card *ngFor="let student of students" [isMentor]="false" [user]="student">
+		</app-user-card>
+	</article>
 </section>

@@ -20,8 +20,7 @@ export class MentorsComponent implements OnInit {
 		this.sub = this.dbService
 			.getAllMentors()
 			.subscribe((mentors: any) => (this.mentors = mentors));
-		console.log(this.mentors);
-		console.dir(this.mentors);
+
 	}
 
 	ngOnDestroy() {
