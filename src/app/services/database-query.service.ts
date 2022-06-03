@@ -14,7 +14,9 @@ export class DatabaseQueryService {
 	}
 
 	/** colletions in firestore:
-	 * boards **/
+	 * boards,
+	 * users,
+	 * **/
 
 	//get all students
 	getAllStudents() {

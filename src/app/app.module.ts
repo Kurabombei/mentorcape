@@ -14,7 +14,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {FirestoreModule} from "@angular/fire/firestore";
 import {AuthModule} from "@angular/fire/auth";
 import {BoardDialogComponent} from './pages/kanban/dialogs/board-dialog/board-dialog.component';
-import {FormsModule} from "@angular/forms";
+import {FormBuilder, FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {TaskDialogComponent} from './pages/kanban/dialogs/task-dialog/task-dialog.component';
 import {HomePageModule} from "./pages/home-page/home-page.module";
@@ -39,7 +39,7 @@ import {HomePageModule} from "./pages/home-page/home-page.module";
 		MatDialogModule,
 		HomePageModule,
 	],
-	providers: [],
+	providers: [FormBuilder],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

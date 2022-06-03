@@ -9,7 +9,6 @@
 			<div class="user-card__uid">UID: {{ user.uid }}</div>
 		</div>
 		<mat-card-content>
-			<p>email: {{ user.email }}</p>
 			<p *ngIf="user.favoriteColor">Favorite color: {{ user.favoriteColor }}</p>
 
 			<ng-container *ngIf="user.isMentor; else studentContent">

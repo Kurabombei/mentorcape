@@ -1,1 +1,99 @@
-<p>mentor-form works!</p>
+<section class="main-container">
+	<mat-card class="main-card">
+		<mat-card-header>
+			<mat-card-title>Fill in the inputs below to start changing life of your mentees!</mat-card-title>
+			<mat-card-subtitle>Build your personal brand while giving back!</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<mat-stepper labelPosition="bottom" [orientation]="(stepperOrientation | async)!" #stepper>
+				<mat-step [stepControl]="personalForm">
+					<form [formGroup]="personalForm" class="main-form">
+						<ng-template matStepLabel>Personal details</ng-template>
+						<mat-form-field appearance="fill">
+							<mat-label>Age</mat-label>
+							<input matInput placeholder="22" formControlName="age" required>
+						</mat-form-field>
+						<mat-form-field appearance="fill">
+							<mat-label>Location</mat-label>
+							<input matInput placeholder="Ukraine, Lviv" formControlName="location" required>
+						</mat-form-field>
+						<mat-form-field appearance="fill">
+							<mat-label>Languages</mat-label>
+							<input matInput placeholder="Choose from the list or type yours" formControlName="languages" required>
+						</mat-form-field>
+						<mat-form-field appearance="fill">
+							<mat-label>Description</mat-label>
+							<input matInput
+										 placeholder="Ex. I have worked on 5 different comercial projects and have lots to share about"
+										 formControlName="description" required>
+						</mat-form-field>
+						<mat-card-actions>
+							<div></div>
+							<button class="main-button main-button--lg main-button--main-filled" matStepperNext>Next</button>
+						</mat-card-actions>
+					</form>
+				</mat-step>
+				<mat-step [stepControl]="mentorForm">
+					<form [formGroup]="mentorForm" class="main-form">
+						<ng-template matStepLabel>Mentorship details</ng-template>
+						<mat-form-field appearance="fill">
+							<mat-label>Current position</mat-label>
+							<input matInput placeholder="Developer at Epam" formControlName="position" required>
+						</mat-form-field>
+						<mat-form-field appearance="fill">
+							<mat-label>Role</mat-label>
+							<input matInput placeholder="Front-end Junior Developer" formControlName="role" required>
+						</mat-form-field>
+						<mat-form-field appearance="fill">
+							<mat-label>Industry</mat-label>
+							<input matInput placeholder="Blockchain, Web3, Crypto" formControlName="industry" required>
+						</mat-form-field>
+						<mat-form-field appearance="fill">
+							<mat-label>Categories</mat-label>
+							<input matInput placeholder="Angular, React, JS, HTML&CSS" formControlName="categories" required>
+						</mat-form-field>
+						<mat-card-actions>
+							<button class="main-button main-button--lg main-button--accent-filled" matStepperPrevious>Back</button>
+							<button class="main-button main-button--lg main-button--main-filled" matStepperNext>Next</button>
+						</mat-card-actions>
+					</form>
+				</mat-step>
+				<mat-step>
+					<ng-template matStepLabel>Calendly link</ng-template>
+					<form [formGroup]="socialsForm" class="main-form">
+						<h2>Set up your calendly link so that mentees can get in touch with you!</h2>
+						<mat-form-field appearance="outline">
+							<mat-label>Your calendly link</mat-label>
+							<input matInput placeholder="https://calendly.com/elon-musk/intro-call" formControlName="socialLink">
+						</mat-form-field>
+						<p>Here are some helpful links for helping setting up your link:</p>
+						<ul>
+							<li>
+								<a
+									href="https://help.calendly.com/hc/en-us/articles/360043820134-Setting-up-your-first-event#step-1-create-your-event-0-1"
+									class="default-link">Registration in calendly (English)</a>
+							</li>
+							<li>
+								<a
+									href="https://help.calendly.com/hc/en-us/articles/360043820134-Setting-up-your-first-event#step-1-create-your-event-0-1"
+									class="default-link">Setting up first event (English)</a>
+							</li>
+							<li>
+								<a
+									href="https://help.calendly.com/hc/en-us/articles/360043820134-Setting-up-your-first-event#step-1-create-your-event-0-1"
+									class="default-link">Getting your calendly link (English)</a>
+							</li>
+						</ul>
+					</form>
+					<mat-card-actions>
+						<button class="main-button main-button--lg main-button--accent-filled" matStepperPrevious>Back
+						</button>
+						<!--						<button  (click)="stepper.reset()">Reset</button>-->
+						<button class="main-button main-button--lg main-button--success" (click)="submit()">Submit
+						</button>
+					</mat-card-actions>
+				</mat-step>
+			</mat-stepper>
+		</mat-card-content>
+	</mat-card>
+</section>

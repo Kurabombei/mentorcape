@@ -31,7 +31,7 @@ export class AuthService {
 
 	async createUserWithEmailAndPassword(email: string, password: string, displayName: string) {
 		return await this.afAuth.createUserWithEmailAndPassword(email, password).then((credential) => {
-			this.updateUserData({...credential.user, displayName: displayName, photoURL: ''});
+			this.setInitialUserData({...credential.user, displayName: displayName, photoURL: ''});
 		});
 	}
 
@@ -43,9 +43,23 @@ export class AuthService {
 		return this.afAuth.signInWithPopup(new firebaseAuth.GoogleAuthProvider())
 			.then((credential) => {
 				if (credential.additionalUserInfo?.isNewUser) {
-					this.updateUserData(credential.user);
+					this.setInitialUserData(credential.user);
 				}
 			});
+	}
+
+	private setInitialUserData(user: any) {
+		const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.uid}`);
+
+		const newUser: User = {
+			uid: user.uid,
+			email: user.email,
+			displayName: user.displayName,
+			photoURL: user.photoURL,
+			isMentor: false
+		}
+
+		return userRef.set(newUser);
 	}
 
 	private updateUserData(user: any) {

@@ -16,6 +16,5 @@ export class BecomeMentorComponent implements OnInit {
 
 	becomeMentor() {
 		this.router.navigate(['/become-mentor']);
-		console.log('Gonna become a mentor some day!');
 	}
 }

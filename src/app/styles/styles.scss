@@ -21,6 +21,24 @@
 	.accent-text {
 		color: mat.get-color-from-palette($mentocape-accent);
 	}
+
+	.step-element__title {
+		color: $second-accent !important;
+	}
+
+	.default-link {
+		font-weight: 500;
+		color: $accent;
+		cursor: pointer;
+
+		&:hover {
+			color: $purple;
+		}
+
+		&--dashed {
+			border-bottom: 1px dashed $purple;
+		}
+	}
 }
 
 .theme-light {
@@ -33,6 +51,20 @@
 
 	.accent-text {
 		color: mat.get-color-from-palette($mentocape-accent);
+	}
+
+	.default-link {
+		font-weight: 500;
+		color: $third-accent;
+		cursor: pointer;
+
+		&:hover {
+			color: $purple;
+		}
+
+		&--dashed {
+			border-bottom: 1px dashed $purple;
+		}
 	}
 
 }
@@ -148,20 +180,6 @@ h5 {
 	padding: 3rem;
 }
 
-.default-link {
-	font-weight: 500;
-	color: $accent;
-	cursor: pointer;
-
-	&:hover {
-		color: $second-accent;
-	}
-
-	&--dashed {
-		border-bottom: 1px dashed $second-accent;
-	}
-}
-
 .main-button {
 	background: $white;
 	border: 1px solid $gray;
@@ -179,7 +197,7 @@ h5 {
 	outline: none;
 
 	&:hover {
-		color: #efbc2d;
+		color: $third-main;
 		box-shadow: none;
 	}
 
@@ -219,10 +237,10 @@ h5 {
 		font-weight: 500;
 
 		&:hover {
-			color: #efbc2d;
+			color: $third-main;
 
 			path {
-				fill: #efbc2d;
+				fill: $third-main;
 			}
 		}
 	}
@@ -258,10 +276,10 @@ h5 {
 		}
 
 		&:hover {
-			color: #efbc2d;
+			color: $third-main;
 
 			path {
-				fill: #efbc2d;
+				fill: $third-main;
 			}
 		}
 	}
@@ -280,15 +298,15 @@ h5 {
 	}
 
 	&--main-filled {
-		background-color: #efbc2d;
+		background-color: $third-main;
 		color: $white;
-		border: 1px solid #efbc2d;
-		box-shadow: 0 1px 1px rgba(32, 36, 46, 0.12), 0 2px 8px rgba(47, 79, 146, 0.24);
+		border: 1px solid $second-main;
 
 		&:hover {
 			background-color: $second-main;
 			color: $white;
-			box-shadow: none;
+			box-shadow: 0 1px 1px rgba(32, 36, 46, 0.12), 0 2px 8px rgba(47, 79, 146, 0.24);
+
 		}
 	}
 
@@ -305,7 +323,7 @@ h5 {
 	}
 
 	&--main {
-		color: #efbc2d;
+		color: $third-main;
 	}
 
 	&[disabled] {
