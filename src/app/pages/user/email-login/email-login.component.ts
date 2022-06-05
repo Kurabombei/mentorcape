@@ -14,6 +14,7 @@ export class EmailLoginComponent implements OnInit {
 	loading = false;
 
 	serverMessage: string = '';
+	private sampleUsers: any;
 
 	constructor(private fb: FormBuilder, private auth: AuthService) {
 		this.form = this.fb.group({
@@ -100,4 +101,7 @@ export class EmailLoginComponent implements OnInit {
 		this.loading = false;
 	}
 
+	async createSampleUsers() {
+		await this.auth.createSampleUsers(15);
+	}
 }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../../core/models/user";
+import {MentorService} from "../../../services/mentor.service";
 
 @Component({
 	selector: 'app-user-card',
@@ -12,7 +13,7 @@ export class UserCardComponent implements OnInit {
 	@Input() isMentor: boolean;
 
 
-	constructor() {
+	constructor(private mentorService: MentorService) {
 	}
 
 	ngOnInit(): void {

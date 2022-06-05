@@ -4,6 +4,8 @@ import {StepperOrientation} from "@angular/cdk/stepper";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {BreakpointObserver} from "@angular/cdk/layout";
+import {MentorService} from "../../../../services/mentor.service";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
 	selector: 'app-mentor-form',
@@ -17,7 +19,7 @@ export class MentorFormComponent implements OnInit {
 	mentorForm: FormGroup;
 	socialsForm: FormGroup;
 
-	constructor(private fb: FormBuilder, breakpointObserver: BreakpointObserver) {
+	constructor(private fb: FormBuilder, breakpointObserver: BreakpointObserver, private mentorService: MentorService, private auth: AuthService) {
 		this.stepperOrientation = breakpointObserver
 			.observe('(min-width: 800px)')
 			.pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -45,8 +47,9 @@ export class MentorFormComponent implements OnInit {
 		let personalData = this.personalForm.value;
 		let mentorshipData = this.mentorForm.value;
 		let socialData = this.socialsForm.value;
-		console.log('ALL DATA SUBMITTED');
-		console.dir({...personalData, ...mentorshipData, ...socialData});
+		const mentor = {...personalData, ...mentorshipData, ...socialData};
 		// Navigate to thank you page for mentor flag.
+
+		this.mentorService.updateMentor(this.auth.userId, mentor);
 	}
 }

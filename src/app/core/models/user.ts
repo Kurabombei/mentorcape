@@ -10,18 +10,21 @@ export class User {
 	photoURL?: string;
 	age?: number;
 
+	// Mentor details
+	description?: string;
+	categories?: Array<string>;
+	industry?: string;
+	role?: string;
+	socialLink?: string;
+	languages?: Array<string>;
+
+
 	favoriteColor?: string;
 	roles?: Array<string>;
 	groupsID?: Array<string>;
-	languages?: Array<string>;
 	mentors?: Array<string>;
 	students?: Array<string>;
 
 	constructor() {
-		this.uid = '';
-		this.email = '';
-		this.displayName = '';
-		this.languages = [];
-		this.mentors = [];
 	}
 }

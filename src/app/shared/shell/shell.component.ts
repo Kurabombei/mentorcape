@@ -23,7 +23,7 @@ export class ShellComponent {
 	isChecked: boolean = false;
 
 	constructor(private breakpointObserver: BreakpointObserver, public auth: AuthService) {
-		this.isLoggedIn = this.auth.isLoggedIn; // todo refactor
+		this.isLoggedIn = this.auth.isLoggedIn;
 	}
 
 	onDarkModeSwitch({checked}: MatSlideToggleChange) {
