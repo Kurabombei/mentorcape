@@ -18,12 +18,10 @@
 <mat-card class="card">
 	<mat-card-header>
 		<img *ngIf="user.photoURL === ''" [src]="'https://robohash.org/' + user.uid" alt="No avatar provided"
-				 class="card__avatar"
-				 mat-card-avatar>
-		<img *ngIf="user.photoURL !== ''" [src]="user.photoURL" alt="No avatar provided" class="card__avatar"
-				 mat-card-avatar>
-		<mat-card-title>{{user.displayName}}</mat-card-title>
-		<mat-card-subtitle *ngIf="!!user.position">{{user.position}}</mat-card-subtitle>
+				 class="card__avatar">
+		<img *ngIf="user.photoURL !== ''" [src]="user.photoURL" alt="No avatar provided" class="card__avatar">
+		<mat-card-title class="card__title">{{user.displayName}}</mat-card-title>
+		<mat-card-subtitle *ngIf="!!user.position" class="card__subtitle">{{user.position}}</mat-card-subtitle>
 	</mat-card-header>
 	<mat-card-content>
 		<ng-container *ngIf="isMentor; else studentContent">
@@ -38,24 +36,45 @@
 		</ng-container>
 
 		<ng-template #studentContent>
-			<p class="card__email">Email: {{user.email}}</p>
-			<p class="card__email">Age: {{user.age}}</p>
-			<p class="card__email">Location: {{user.location}}</p>
-			<p class="card__email">Languages: {{user.languages}}</p>
-			<p class="card__email">Mentors: {{user.mentors}}</p>
+			<mat-chip-list class="chip-list">
+				<mat-chip selected color="'primary'">Email: {{user.email}}</mat-chip>
+			</mat-chip-list>
+			<ng-container *ngIf="!!user.age">
+				<p class="card__email">Age: {{user.age}}</p>
+				<p class="card__email">Location: {{user.location}}</p>
+				<p class="card__email">Languages: {{user.languages}}</p>
+				<p class="card__email">Mentors: {{user.mentors}}</p>
+			</ng-container>
 		</ng-template>
 
 	</mat-card-content>
 	<mat-card-footer>
 		<mat-card-actions>
 			<ng-container *ngIf="isMentor; else studentActions">
-				<button [routerLink]="['mentors/view/' + user.uid]" color="warn" mat-stroked-button>Show more!</button>
-				<a [href]="user.socialLink" color="accent" mat-flat-button target="_blank">Book an intro call</a>
+				<button
+					mat-stroked-button
+					[routerLink]="['mentors/view/' + user.uid]"
+					class="main-button--x-lg"
+					color="warn"
+				>Show more!
+				</button>
+				<button
+					mat-flat-button
+					(click)="navigateToUrl(user.socialLink)"
+					class="main-button main-button--x-lg"
+					color="accent"
+					target="_blank">Book an intro call
+				</button>
 			</ng-container>
 
 			<ng-template #studentActions>
-				<button [routerLink]="['mentors/view/' + user.uid]" color="warn" mat-stroked-button>Show more!</button>
-				<a [href]="user.socialLink" color="accent" mat-flat-button target="_blank">Book an intro call</a>
+				<!--				<button mat-stroked-button [routerLink]="['mentors/view/' + user.uid]" class="main-button&#45;&#45;x-lg" color="warn">-->
+				<!--					Show more!-->
+				<!--				</button>-->
+				<!--				<button mat-flat-button (click)="navigateToUrl(user.socialLink)" class="main-button main-button&#45;&#45;x-lg"-->
+				<!--								color="accent"-->
+				<!--								target="_blank">Book an intro call-->
+				<!--				</button>-->
 			</ng-template>
 		</mat-card-actions>
 	</mat-card-footer>

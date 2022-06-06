@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 @import 'palette';
 
@@ -19,14 +20,22 @@ $mentocape-warn: mat.define-palette(mat.$red-palette);
 $mentorcape-theme-surface: mat.define-palette($orange, 100);
 $mentorcape-theme-background: mat.define-palette($cyan, 100);
 
+$mentorcape-light-background: mat.get-color-from-palette($cyan, 100);
+$mentorcape-dark-background: mat.get-color-from-palette($darkblue, 700);
+
 
 $mentocape-dark-theme: mat.define-dark-theme((
 	color: (
-		primary: $mentocape-primary,
-		accent: $mentocape-accent,
+		primary: $mentocape-accent,
+		accent: $mentocape-primary,
 		warn: $mentocape-warn,
 	)
 ));
+
+// Insert custom background color for dark theme
+$background-dark: map.get($mentocape-dark-theme, background);
+$background-dark: map.merge($background-dark, (background: $mentorcape-dark-background));
+$mentocape-dark-theme: map.merge($mentocape-dark-theme, (background: $background-dark));
 
 $mentocape-light-theme: mat.define-light-theme((
 	color: (
@@ -35,5 +44,10 @@ $mentocape-light-theme: mat.define-light-theme((
 		warn: $mentocape-warn,
 	)
 ));
+
+// Insert custom background color for light theme
+$background-light: map.get($mentocape-light-theme, background);
+$background-light: map.merge($background-light, (background: $mentorcape-light-background));
+$mentocape-light-theme: map.merge($mentocape-light-theme, (background: $background-light));
 
 @include mat.all-component-themes($mentocape-dark-theme);

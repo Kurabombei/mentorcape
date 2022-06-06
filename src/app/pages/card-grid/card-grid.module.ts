@@ -7,6 +7,7 @@ import {MentorsComponent} from './mentors/mentors.component';
 import {BriefUserCardComponent} from './brief-user-card/brief-user-card.component';
 import {SharedModule} from "../../shared/shared.module";
 import {UserCardComponent} from './user-card/user-card.component';
+import {MatChipsModule} from "@angular/material/chips";
 
 const components = [
 	StudentsComponent,
@@ -21,7 +22,8 @@ const components = [
 	imports: [
 		CommonModule,
 		CardGridRoutingModule,
-		SharedModule
+		SharedModule,
+		MatChipsModule
 	],
 	exports: [
 		...components

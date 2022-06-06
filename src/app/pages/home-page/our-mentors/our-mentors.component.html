@@ -1,56 +1,36 @@
 <section class="media-container">
 	<h2>Meet our mentors</h2>
 	<div class="mentors-grid">
-		<mat-card class="mentor-card">
+		<mat-card class="card" *ngFor="let mentor of mentors">
 			<mat-card-header>
-				<div mat-card-avatar class="mentor-card__image"></div>
-				<mat-card-title>Oles Ivanenko</mat-card-title>
-				<mat-card-subtitle>JS Fullstack developer</mat-card-subtitle>
+				<img *ngIf="mentor.photoURL === ''" [src]="'https://robohash.org/' + mentor.uid" alt="No avatar provided"
+						 class="card__avatar">
+				<img *ngIf="mentor.photoURL !== ''" [src]="mentor.photoURL" alt="No avatar provided" class="card__avatar">
+				<mat-card-title class="card__title">{{mentor.displayName}}</mat-card-title>
+				<mat-card-subtitle *ngIf="!!mentor.position" class="card__subtitle">{{mentor.position}}</mat-card-subtitle>
 			</mat-card-header>
-			<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
 			<mat-card-content>
-				<p>
-					I have 6+ years of experience and finished 13+ projects. I can provide additional calls/lectures regarding js
-					if needed.
-				</p>
+				<p class="card__prop">Age: {{mentor.age}}</p>
+				<p class="card__prop">Location: {{mentor.location}}</p>
+				<p class="card__prop">Languages: {{mentor.languages}}</p>
+				<p class="card__prop">Description: {{mentor.description}}</p>
+				<p class="card__prop">Position: {{mentor.position}}</p>
+				<p class="card__prop">Role: {{mentor.role}}</p>
+				<p class="card__prop">Industry: {{mentor.industry}}</p>
+				<p class="card__prop">Categories: {{mentor.categories}}</p>
 			</mat-card-content>
-			<mat-card-actions>
-				<button mat-button>Apply for mentorship</button>
-			</mat-card-actions>
+			<mat-card-footer>
+				<mat-card-actions>
+					<button
+						mat-flat-button
+						(click)="navigateToUrl(mentor.socialLink)"
+						class="main-button main-button--x-lg"
+						color="accent"
+						target="_blank">Book an intro call
+					</button>
+				</mat-card-actions>
+			</mat-card-footer>
 		</mat-card>
-		<mat-card class="mentor-card">
-			<mat-card-header>
-				<div mat-card-avatar class="mentor-card__image"></div>
-				<mat-card-title>Oles Ivanenko</mat-card-title>
-				<mat-card-subtitle>JS Fullstack developer</mat-card-subtitle>
-			</mat-card-header>
-			<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-			<mat-card-content>
-				<p>
-					I have 6+ years of experience and finished 13+ projects. I can provide additional calls/lectures regarding js
-					if needed.
-				</p>
-			</mat-card-content>
-			<mat-card-actions>
-				<button mat-button>Apply for mentorship</button>
-			</mat-card-actions>
-		</mat-card>
-		<mat-card class="mentor-card">
-			<mat-card-header>
-				<div mat-card-avatar class="mentor-card__image"></div>
-				<mat-card-title>Oles Ivanenko</mat-card-title>
-				<mat-card-subtitle>JS Fullstack developer</mat-card-subtitle>
-			</mat-card-header>
-			<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-			<mat-card-content>
-				<p>
-					I have 6+ years of experience and finished 13+ projects. I can provide additional calls/lectures regarding js
-					if needed.
-				</p>
-			</mat-card-content>
-			<mat-card-actions>
-				<button mat-button>Apply for mentorship</button>
-			</mat-card-actions>
-		</mat-card>
+
 	</div>
 </section>

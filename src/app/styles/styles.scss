@@ -11,8 +11,24 @@
 // DARK/LIGHT styles
 .theme-dark {
 	@include mat.all-component-themes($mentocape-dark-theme);
-	background-color: $dark-blue;
-	color: $light-blue;
+
+	.mat-drawer-container {
+		background-color: #121212;
+		color: mat.get-color-from-palette($cyan, 50);
+
+		.mat-card {
+			background-color: $dark-blue;
+			background-image: linear-gradient(315deg, rgba(12, 186, 186, 0.4) 0%, rgba(56, 0, 54, 0.2) 74%);
+
+			.card__avatar {
+				padding: 8px;
+				border: 12px solid transparent;
+				background-color: #f5d020;
+				background: linear-gradient(315deg, rgba(245, 208, 32, 0.8) 0%, rgba(245, 56, 3, 0.8) 74%) padding-box,
+				linear-gradient(315deg, rgba(245, 208, 32, 0.2), rgba(245, 56, 3, 0.2)) border-box;
+			}
+		}
+	}
 
 	.primary-text {
 		color: mat.get-color-from-palette($mentocape-primary);
@@ -20,6 +36,9 @@
 
 	.accent-text {
 		color: mat.get-color-from-palette($mentocape-accent);
+	}
+
+	.card {
 	}
 
 	.step-element__title {
@@ -43,7 +62,24 @@
 
 .theme-light {
 	@include mat.all-component-themes($mentocape-light-theme);
-	background-color: $light-blue;
+
+	.mat-drawer-container {
+		background-color: $light-blue;
+		background-image: linear-gradient(315deg, rgba(238, 192, 198, 0.2) 0%, rgba(126, 232, 250, 0.2) 74%);
+		color: mat.get-color-from-palette($darkblue, 900);
+
+		.mat-card {
+			background-color: #ffffff;
+			//background-image: linear-gradient(315deg, rgba(239, 87, 52, 0.2) 0%, rgba(255, 204, 47, 0.2) 74%);
+			.card__avatar {
+				padding: 8px;
+				border: 12px solid transparent;
+				background-color: #f5d020;
+				background: linear-gradient(315deg, rgba(245, 208, 32, 0.8) 0%, rgba(245, 56, 3, 0.8) 74%) padding-box,
+				linear-gradient(315deg, rgba(245, 208, 32, 0.2), rgba(245, 56, 3, 0.2)) border-box;
+			}
+		}
+	}
 
 	.primary-text {
 		color: mat.get-color-from-palette($darkblue);
@@ -109,6 +145,10 @@ h1, h2, h3, h4, h5, h6 {
 		text-transform: uppercase;
 		@include gradient-text(#ff4b4b, #008cff);
 	}
+}
+
+gradient {
+	@include gradient-text(#ffcc00, #ff4b4b);
 }
 
 h1 {

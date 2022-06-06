@@ -7,4 +7,10 @@ export class UtilService {
 
 	constructor() {
 	}
+
+	navigateToUrl(socialLink?: string) {
+		if (!!socialLink) {
+			window.open(socialLink, "_blank");
+		}
+	}
 }

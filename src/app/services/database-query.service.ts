@@ -52,6 +52,23 @@ export class DatabaseQueryService {
 		);
 	}
 
+	// get all mentors
+	getTopMentors() {
+		return this.afAuth.authState.pipe(
+			switchMap(user => {
+				if (user) {
+					return this.db
+						.collection<User>('users', ref =>
+							ref.where('isMentor', '==', true).orderBy('rating').limit(3)
+						)
+						.valueChanges({idField: 'id'});
+				} else {
+					return [];
+				}
+			})
+		);
+	}
+
 	// get 1 mentor details
 	getMentorDetails(mentorId: string) {
 		return this.db.collection('users').doc(mentorId)

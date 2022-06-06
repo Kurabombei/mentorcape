@@ -1,14 +1,41 @@
+@import "~src/app/styles/colors";
 
 .card {
 	display: flex;
 	position: relative;
-	flex-direction: column;
-	padding: 1.5rem;
+	flex-flow: column nowrap;
+	padding: 1.5rem 1.5rem 0;
+
+	mat-card-header {
+		align-items: center;
+		flex-direction: column-reverse;
+		text-align: center;
+	}
+
+	mat-card-footer {
+		height: 100%;
+
+		mat-card-actions {
+			padding: 0;
+
+			> * {
+				width: 50%;
+			}
+		}
+	}
+
+	&__title {
+		margin-top: 1rem;
+	}
+
+	&__subtitle {
+		margin-top: 0.5rem;
+	}
 
 	&__avatar {
+		width: 200px;
+		max-width: 50%;
 		aspect-ratio: 1 / 1;
-		padding: 2px;
-		border: 6px solid coral;
 		border-radius: 50%;
 	}
 }
