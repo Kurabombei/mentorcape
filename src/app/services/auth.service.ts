@@ -69,9 +69,6 @@ export class AuthService {
 			let displayName = `${maleNames[Math.floor(Math.random() * maleNames.length)]} ${surnames[Math.floor(Math.random() * surnames.length)]}`;
 			let email = `${displayName.split(' ').join('')}@test-mail.com`;
 			let pass = `password${i + 1000}`;
-			console.log('email: ', email);
-			console.log('pass: ', pass);
-			console.log('displayName: ', displayName);
 			await this.createUserWithEmailAndPassword(email, pass, displayName);
 		}
 		console.log(`Added ${numberOfUsers} users to firestore.`);
@@ -79,8 +76,6 @@ export class AuthService {
 
 	private setInitialUserData<Tparams>(user: any, optionalParams?: Tparams) {
 		const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.uid}`);
-		console.log('inicial userData', user);
-		console.log('inicial userRef', userRef);
 		if (!!userRef) {
 			const newUser: any = {
 				uid: user.uid,
@@ -94,8 +89,6 @@ export class AuthService {
 					newUser[param[0]] = param[1];
 				})
 			}
-
-			console.log('new User', newUser);
 
 			return userRef.set(newUser);
 		} else {

@@ -25,6 +25,27 @@ export class BoardService {
 		});
 	}
 
+	async createDefaultTasks() {
+		let boards: Board[] = [{
+			title: 'To do',
+			priority: 0,
+			
+		}]
+
+		const db = firebase.firestore();
+		const batch = db.batch();
+		const refs = boards.map(b => db.collection('boards').doc(b.id));
+		refs.forEach((ref, idx) => batch.update(ref, {priority: idx}));
+		batch.commit();
+
+		const user = await this.afAuth.currentUser;
+		return this.db.collection('boards').add({
+			title: 'To do',
+			priority: 0,
+			tasks: [{description: 'To get to know MentorCape.'}]
+		})
+	}
+
 	/**
 	 * Delete board
 	 */
