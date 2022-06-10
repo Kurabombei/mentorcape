@@ -1,21 +1,60 @@
-<div
-  cdkDropList
-  cdkDropListOrientation="horizontal"
-  class="boards"
-  (cdkDropListDropped)="drop($event)"
->
-  <app-board cdkDrag *ngFor="let board of boards" [board]="board">
-    <mat-icon cdkDragHandle class="handle">drag_indicator</mat-icon>
-  </app-board>
+<ng-container cdkDropListGroup>
+	<div
+		cdkDropList
+		cdkDropListOrientation="horizontal"
+		class="boards"
+		(cdkDropListDropped)="drop($event)"
+	>
+		<app-board cdkDrag *ngFor="let board of boards" [board]="board">
+			<mat-icon cdkDragHandle class="handle">drag_indicator</mat-icon>
+		</app-board>
 
-  <div class="board-button">
-    <button
-      mat-raised-button
-      color="accent"
-      cdkDragDisabled
-      (click)="openBoardDialog()"
-    >
-      New Board
-    </button>
-  </div>
-</div>
+		<div class="board-button">
+			<button
+				mat-raised-button
+				color="accent"
+				cdkDragDisabled
+				(click)="openBoardDialog()"
+			>
+				New Board
+			</button>
+		</div>
+	</div>
+
+	<div cdkDropListGroup>
+		<div class="example-container">
+			<h2>To do</h2>
+
+			<div
+				cdkDropList
+				[cdkDropListData]="todo"
+				class="example-list"
+				(cdkDropListDropped)="drop($event)">
+				<div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+			</div>
+		</div>
+
+		<div class="example-container">
+			<h2>In progress</h2>
+
+			<div
+				cdkDropList
+				[cdkDropListData]="done"
+				class="example-list"
+				(cdkDropListDropped)="drop($event)">
+				<div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+			</div>
+		</div>
+		<div class="example-container">
+			<h2>Done</h2>
+
+			<div
+				cdkDropList
+				[cdkDropListData]="done"
+				class="example-list"
+				(cdkDropListDropped)="drop($event)">
+				<div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+			</div>
+		</div>
+	</div>
+</ng-container>

@@ -1,51 +1,55 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Subscription } from 'rxjs';
-import { Board } from '../board.model';
-import { BoardService } from '../board.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {Subscription} from 'rxjs';
+import {Board} from '../board.model';
+import {BoardService} from '../board.service';
 import {MatDialog} from "@angular/material/dialog";
 import {BoardDialogComponent} from "../dialogs/board-dialog/board-dialog.component";
 
 @Component({
-  selector: 'app-board-list',
-  templateUrl: './board-list.component.html',
-  styleUrls: ['./board-list.component.scss']
+	selector: 'app-board-list',
+	templateUrl: './board-list.component.html',
+	styleUrls: ['./board-list.component.scss']
 })
 export class BoardListComponent implements OnInit, OnDestroy {
-  boards: Board[] = [];
-  sub: Subscription = new Subscription();
+	boards: Board[] = [];
+	sub: Subscription = new Subscription();
+	todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
-  constructor(public boardService: BoardService, public dialog: MatDialog) {}
+	done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
-  ngOnInit() {
-    this.sub = this.boardService
-      .getUserBoards()
-      .subscribe(boards => (this.boards = boards));
-  }
+	constructor(public boardService: BoardService, public dialog: MatDialog) {
+	}
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+	ngOnInit() {
+		this.sub = this.boardService
+			.getUserBoards()
+			.subscribe(boards => (this.boards = boards));
+	}
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.boards, event.previousIndex, event.currentIndex);
-    this.boardService.sortBoards(this.boards);
-  }
+	ngOnDestroy() {
+		this.sub.unsubscribe();
+	}
 
-  openBoardDialog(): void {
-    const dialogRef = this.dialog.open(BoardDialogComponent, {
-      width: '400px',
-      data: {  }
-    });
+	drop(event: CdkDragDrop<string[]>) {
+		moveItemInArray(this.boards, event.previousIndex, event.currentIndex);
+		this.boardService.sortBoards(this.boards);
+	}
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.boardService.createBoard({
-          title: result,
-          priority: this.boards.length
-        });
-      }
-    });
-  }
+	openBoardDialog(): void {
+		const dialogRef = this.dialog.open(BoardDialogComponent, {
+			width: '400px',
+			data: {}
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				this.boardService.createBoard({
+					title: result,
+					priority: this.boards.length
+				});
+			}
+		});
+	}
 
 }
