@@ -14,16 +14,64 @@ export class BoardService {
 	private initBoard = [
 		{
 			id: 1,
+			uid: 1,
 			title: 'To Do',
 			color: '#009886',
-			list: [
+			priority: 1,
+			tasks: [
 				{
 					id: 1,
-					text: 'Example card item',
+					description: 'Example card item',
+					label: 'yellow',
 					like: 1,
 					comments: [
 						{
 							id: 1,
+							uid: 1,
+							text: 'Some comment'
+						}
+					]
+				},
+			]
+		},
+		{
+			id: 2,
+			uid: 2,
+			title: 'In progress',
+			color: '#009886',
+			priority: 2,
+			tasks: [
+				{
+					id: 2,
+					description: 'Example card item',
+					label: 'yellow',
+					like: 1,
+					comments: [
+						{
+							id: 1,
+							uid: 2,
+							text: 'Some comment'
+						}
+					]
+				},
+			]
+		},
+		{
+			id: 3,
+			uid: 3,
+			title: 'Done',
+			color: '#009886',
+			priority: 3,
+			tasks: [
+				{
+					id: 3,
+					description: 'Example card item',
+					label: 'yellow',
+					like: 1,
+					comments: [
+						{
+							id: 1,
+							uid: 3,
 							text: 'Some comment'
 						}
 					]
@@ -159,10 +207,11 @@ export class BoardService {
 
 	addColumn(title: string) {
 		const newColumn: Column = {
+			uid: 0,
 			id: Date.now(),
 			title: title,
 			color: '#009886',
-			list: [],
+			tasks: []
 		};
 
 		this.board = [...this.board, newColumn];
@@ -172,14 +221,14 @@ export class BoardService {
 	addCard(text: string, columnId: number) {
 		const newCard: Card = {
 			id: Date.now(),
-			text,
+			description: text,
 			like: 0,
 			comments: [],
 		};
 
 		this.board = this.board.map((column: Column) => {
 			if (column.id === columnId) {
-				column.list = [newCard, ...column.list];
+				column.tasks = [newCard, ...column.tasks];
 			}
 			return column;
 		});
@@ -195,7 +244,7 @@ export class BoardService {
 	deleteCard(cardId: number, columnId: number) {
 		this.board = this.board.map((column: Column) => {
 			if (column.id === columnId) {
-				column.list = column.list.filter((card: Card) => card.id !== cardId);
+				column.tasks = column.tasks.filter((card: Card) => card.id !== cardId);
 			}
 			return column;
 		});
@@ -206,8 +255,8 @@ export class BoardService {
 	changeLike(cardId: number, columnId: number, increase: boolean) {
 		this.board = this.board.map((column: Column) => {
 			if (column.id === columnId) {
-				const list = column.list.map((card: Card) => {
-					if (card.id === cardId) {
+				const taskList = column.tasks.map((card: Card) => {
+					if (!!card.like && card.id === cardId) {
 						if (increase) {
 							card.like++;
 						} else {
@@ -219,7 +268,7 @@ export class BoardService {
 					return card;
 				});
 
-				column.list = list;
+				column.tasks = taskList;
 				return column;
 			} else {
 				return column;
@@ -232,18 +281,19 @@ export class BoardService {
 	addComment(columnId: number, cardId: number, text: string) {
 		this.board = this.board.map((column: Column) => {
 			if (column.id === columnId) {
-				const list = column.list.map((card: Card) => {
+				const taskList = column.tasks.map((card: Card) => {
 					if (card.id === cardId) {
 						const newComment = {
 							id: Date.now(),
 							text,
 						};
+						// @ts-ignore
 						card.comments = [newComment, ...card.comments];
 					}
 					return card;
 				});
 
-				column.list = list;
+				column.tasks = taskList;
 			}
 			return column;
 		});
@@ -254,15 +304,15 @@ export class BoardService {
 	deleteComment(columnId: number, itemId: number, commentId: any) {
 		this.board = this.board.map((column: Column) => {
 			if (column.id === columnId) {
-				const list = column.list.map((item) => {
-					if (item.id === itemId) {
+				const taskList = column.tasks.map((item) => {
+					if (!!item.comments && item.id === itemId) {
 						item.comments = item.comments.filter((comment: Comment) => {
 							return comment.id !== commentId
 						})
 					}
 					return item
 				})
-				column.list = list
+				column.tasks = taskList
 			}
 			return column
 		})

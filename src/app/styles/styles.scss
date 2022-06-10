@@ -391,3 +391,37 @@ h5 {
 	}
 }
 
+.d-flex {
+	display: flex;
+}
+
+.justify-content {
+	&-between {
+		justify-content: space-between;
+	}
+
+	&-center {
+		justify-content: center;
+	}
+
+	&-end {
+		justify-content: end;
+	}
+
+}
+
+.align-items {
+	&-start {
+		align-items: start;
+	}
+
+	&-center {
+		align-items: center;
+	}
+
+	&-end {
+		align-items: end;
+	}
+
+}
+

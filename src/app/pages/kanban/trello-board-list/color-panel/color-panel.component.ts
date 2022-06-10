@@ -1,4 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+
+enum colors {
+	BLUE = "#71deff",
+	GREEN = "#36e9b6",
+	ORANGE = "#e84e07",
+	YELLOW = "#ffcf44",
+	PURPLE = "#b15cff",
+	PINK = "#ee158a",
+	RED = "#e74a4a",
+	GRAY = "gray",
+}
 
 @Component({
 	selector: 'app-color-panel',
@@ -6,9 +17,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 	styleUrls: ['./color-panel.component.scss']
 })
 export class ColorPanelComponent implements OnInit {
-	@Input() comment: any;
-
-	@Output() emitComment: EventEmitter<any> = new EventEmitter();
+	@Output() emitColor: EventEmitter<string> = new EventEmitter();
+	colorsData = Object.values(colors);
 
 	constructor() {
 	}
@@ -16,8 +26,7 @@ export class ColorPanelComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	onCommentEmit(comment: Comment) {
-		this.emitComment.emit(comment);
+	onColorEmit(color: string) {
+		this.emitColor.emit(color);
 	}
-
 }

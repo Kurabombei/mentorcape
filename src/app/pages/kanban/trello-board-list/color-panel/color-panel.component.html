@@ -1,1 +1,10 @@
-<p>color-panel works!</p>
+<div class="d-flex justify-content-center align-items-center">
+	<div *ngFor="let color of colorsData">
+		<div
+			[ngStyle]="{background: color}"
+			(click)="onColorEmit(color)"
+			class="color-panel-item">
+
+		</div>
+	</div>
+</div>

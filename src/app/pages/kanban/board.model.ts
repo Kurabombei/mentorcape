@@ -12,19 +12,23 @@ export interface Task {
 
 export interface Comment {
 	id: number,
+	uid: number,
 	text: string,
 }
 
 export interface Card {
 	id: number,
-	text: string,
-	like: number,
-	comments: Comment[]
+	description: string,
+	label?: string,
+	like?: number,
+	comments?: Array<Comment>
 }
 
 export interface Column {
 	id: number,
+	uid: number,
 	title: string,
 	color: string,
-	list: Card[]
+	priority?: number;
+	tasks: Card[]
 }

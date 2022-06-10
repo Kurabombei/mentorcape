@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {BoardService} from "../board.service";
 import {Card} from "../board.model";
+import {BoardDialogComponent} from "../dialogs/board-dialog/board-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
 	selector: 'app-trello-board-list',
@@ -9,13 +11,15 @@ import {Card} from "../board.model";
 	styleUrls: ['./trello-board-list.component.scss']
 })
 export class TrelloBoardListComponent implements OnInit {
+	public boards: Array<any>;
+
 	constructor(
-		public boardService: BoardService
+		public boardService: BoardService,
+		public dialog: MatDialog
 	) {
 	}
 
 	ngOnInit(): void {
-		console.log('BOARD - INIT')
 	}
 
 	onColorChange(color: string, columnId: number) {
@@ -60,4 +64,25 @@ export class TrelloBoardListComponent implements OnInit {
 		}
 	}
 
+	openBoardDialog(): void {
+		const dialogRef = this.dialog.open(BoardDialogComponent, {
+			width: '400px',
+			data: {}
+		});
+
+		dialogRef.afterClosed().subscribe((result: any) => {
+			if (result) {
+				this.boardService.createBoard({
+					title: result,
+					priority: this.boards.length
+				});
+			}
+		});
+	}
+
+	addColumn(event: any) {
+		if (event) {
+			this.boardService.addColumn(event)
+		}
+	}
 }
