@@ -2,7 +2,9 @@
 	<mat-card-content>
 		<div *ngIf="isSignup">
 			<h3>Create Account</h3>
-
+			<button appGoogleSignin mat-raised-button>
+				<img src="/assets/icons/google-logo.svg"/> with Google
+			</button>
 			<button (click)="changeType('login')" mat-stroked-button>
 				Returning user?
 			</button>
