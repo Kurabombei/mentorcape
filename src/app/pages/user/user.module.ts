@@ -12,7 +12,6 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
 import {BecomeMentorComponent} from './user-profile/become-mentor/become-mentor.component';
 import {MentorFormComponent} from './user-profile/mentor-form/mentor-form.component';
 import {MatStepperModule} from "@angular/material/stepper";
-import { LogoutDirective } from './logout.directive';
 
 
 @NgModule({
@@ -23,7 +22,6 @@ import { LogoutDirective } from './logout.directive';
 		UserProfileComponent,
 		BecomeMentorComponent,
 		MentorFormComponent,
-  LogoutDirective,
 	],
 	imports: [
 		CommonModule,
@@ -33,6 +31,7 @@ import { LogoutDirective } from './logout.directive';
 		ReactiveFormsModule,
 		MatStepperModule,
 	],
+	exports: [],
 	providers: [
 		FormBuilder
 	]

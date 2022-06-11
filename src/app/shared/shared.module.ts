@@ -21,8 +21,9 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
+import {LogoutDirective} from "./directives/logout.directive";
 
-const components = [ShellComponent, DeleteButtonComponent];
+const components = [ShellComponent, DeleteButtonComponent, LogoutDirective];
 
 const modules = [
 	CommonModule,
