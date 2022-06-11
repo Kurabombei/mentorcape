@@ -19,6 +19,8 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {DeleteButtonComponent} from './delete-button/delete-button.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {FormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from "@angular/material/core";
 
 const components = [ShellComponent, DeleteButtonComponent];
 
@@ -32,8 +34,9 @@ const modules = [
 	MatSidenavModule,
 	MatListModule,
 	MatMenuModule,
-	MatIconModule,
 	MatCardModule,
+	MatSelectModule,
+	MatOptionModule,
 	MatFormFieldModule,
 	MatInputModule,
 	MatSnackBarModule,

@@ -21,6 +21,11 @@ const routes: Routes = [
 		path: 'kanban',
 		loadChildren: () => import('./pages/kanban/kanban.module').then(m => m.KanbanModule),
 		canActivate: [AuthGuard]
+	},
+	{
+		path: 'dashboard',
+		loadChildren: () => import('./pages/mentor-dashboard/mentor-dashboard.module').then(m => m.MentorDashboardModule),
+		canActivate: [AuthGuard]
 	}
 ];
 

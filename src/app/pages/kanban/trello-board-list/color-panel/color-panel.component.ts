@@ -1,14 +1,14 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 enum colors {
-	BLUE = "#71deff",
-	GREEN = "#36e9b6",
-	ORANGE = "#e84e07",
-	YELLOW = "#ffcf44",
-	PURPLE = "#b15cff",
-	PINK = "#ee158a",
-	RED = "#e74a4a",
-	GRAY = "gray",
+	MANUAL = "rgba(113,222,255,0.9)",
+	SUCCESS = "rgba(54,233,182,0.9)",
+	WARNING = "rgba(232,78,7,0.9)",
+	INVESTIGATE = "rgba(213,181,0,0.8)",
+	CURIOUS = "rgba(177,92,255,0.9)",
+	COSMETICS = "rgba(238,21,138,0.9)",
+	BUGS = "rgba(231,74,74,0.9)",
+	DISABLED = "rgba(138,138,138,0.9)",
 }
 
 @Component({
@@ -18,7 +18,7 @@ enum colors {
 })
 export class ColorPanelComponent implements OnInit {
 	@Output() emitColor: EventEmitter<string> = new EventEmitter();
-	colorsData = Object.values(colors);
+	colorsData = Object.entries(colors);
 
 	constructor() {
 	}

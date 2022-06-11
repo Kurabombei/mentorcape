@@ -1,10 +1,23 @@
 <div class="d-flex justify-content-center align-items-center">
-	<div *ngFor="let color of colorsData">
-		<div
-			[ngStyle]="{background: color}"
-			(click)="onColorEmit(color)"
-			class="color-panel-item">
-
-		</div>
+	<div class=" color">
+		<button mat-button [matMenuTriggerFor]="colorMenu">Status</button>
+		<mat-menu #colorMenu="matMenu">
+			<button
+				*ngFor="let color of colorsData"
+				mat-menu-item
+				[ngStyle]="{background: color[1]}"
+				(click)="onColorEmit(color[1])">
+				<mat-icon [ngStyle]="{background: 'rgba(0,0,0,0.5)',opacity: 0.9}">color_lens</mat-icon>
+				{{color[0] | titlecase}}
+			</button>
+		</mat-menu>
 	</div>
+	<!--	<div *ngFor="let color of colorsData">-->
+	<!--		<div-->
+	<!--			[ngStyle]="{background: color}"-->
+	<!--			(click)="onColorEmit(color)"-->
+	<!--			class="color-panel-item">-->
+
+	<!--		</div>-->
+	<!--	</div>-->
 </div>

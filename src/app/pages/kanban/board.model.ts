@@ -12,7 +12,7 @@ export interface Task {
 
 export interface Comment {
 	id: number,
-	uid: number,
+	uid: string,
 	text: string,
 }
 
@@ -25,8 +25,8 @@ export interface Card {
 }
 
 export interface Column {
-	id: number,
-	uid: number,
+	id: string,
+	uid: string,
 	title: string,
 	color: string,
 	priority?: number;

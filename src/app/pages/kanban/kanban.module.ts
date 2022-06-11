@@ -7,7 +7,6 @@ import {SharedModule} from "../../shared/shared.module";
 import {FormsModule} from "@angular/forms";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {MatDialogModule} from "@angular/material/dialog";
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {BoardComponent} from './board/board.component';
 import {TrelloBoardListComponent} from './trello-board-list/trello-board-list.component';
 import {BoardItemComponent} from './trello-board-list/board-item/board-item.component';
@@ -35,7 +34,6 @@ import {DialogBodyComponent} from './dialogs/dialog-body/dialog-body.component';
 		FormsModule,
 		DragDropModule,
 		MatDialogModule,
-		MatButtonToggleModule
 	], exports: [
 		TrelloBoardListComponent,
 		BoardItemComponent,

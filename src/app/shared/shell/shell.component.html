@@ -11,14 +11,21 @@
 		<mat-nav-list>
 			<a (click)="drawer.close()" mat-list-item routerLink="/">Home</a>
 			<ng-container *ngIf="this.auth.user | async">
-				<a (click)="drawer.close()" mat-list-item routerLink="/kanban">🍱 My tasks</a>
-
-				<a (click)="drawer.close()" mat-list-item routerLink="/card-grid/students">⚡ Students</a>
-				<a (click)="drawer.close()" mat-list-item routerLink="/card-grid/mentors">⚡ Mentors</a>
+				<ng-container *ngIf="this.mentorState === 'mentor'; else studentMenu">
+					<a (click)="drawer.close()" mat-list-item routerLink="/dashboard">🍱 Dashboard</a>
+					<a (click)="drawer.close()" mat-list-item routerLink="/dashboard/mentees">⚡ My students</a>
+					<a (click)="drawer.close()" mat-list-item routerLink="/card-grid/mentors">⚡ All mentors</a>
+					<a (click)="drawer.close()" mat-list-item routerLink="/card-grid/students">⚡ All Students</a>
+				</ng-container>
+				<ng-template #studentMenu>
+					<a (click)="drawer.close()" mat-list-item routerLink="/kanban">🍱 My tasks</a>
+					<a (click)="drawer.close()" mat-list-item routerLink="/card-grid/mentors">⚡ Mentors</a>
+				</ng-template>
 			</ng-container>
+			<a (click)="drawer.close()" mat-list-item routerLink="/user-profile">🐱‍👤 My profile</a>
 
-			<a (click)="drawer.close()" mat-list-item routerLink="/faq">⚡ FAQ</a>
-			<a (click)="drawer.close()" mat-list-item routerLink="/about-us">⚡ About MentorCape</a>
+			<!--			<a (click)="drawer.close()" mat-list-item routerLink="/faq">⚡ FAQ</a>-->
+			<!--			<a (click)="drawer.close()" mat-list-item routerLink="/about-us">⚡ About MentorCape</a>-->
 		</mat-nav-list>
 	</mat-sidenav>
 	<mat-sidenav-content>
@@ -43,10 +50,17 @@
 			<!--      <span class="fill-space"></span>-->
 			<div *ngIf="!(isHandset$ | async)">
 				<ng-container *ngIf="this.auth.user | async">
-					<a mat-button routerLink="/kanban">🍱 My tasks</a>
-					<a mat-button routerLink="/card-grid/students">⚡ All students</a>
-					<a mat-button routerLink="/card-grid/mentors">⚡ All mentors</a>
-					<a *ngIf="this.auth.user | async" mat-button routerLink="/user-profile">🐱‍👤 My profile</a>
+					<ng-container *ngIf="this.mentorState === 'mentor'; else studentMenu">
+						<a mat-button routerLink="/dashboard">🍱 Dashboard</a>
+						<a mat-button routerLink="/card-grid/students">⚡ My students</a>
+						<a mat-button routerLink="/card-grid/mentors">⚡ All mentors</a>
+						<a mat-button routerLink="/card-grid/students">⚡ All students</a>
+					</ng-container>
+					<ng-template #studentMenu>
+						<a mat-button routerLink="/kanban">🍱 My tasks</a>
+						<a mat-button routerLink="/card-grid/mentors">⚡ All mentors</a>
+					</ng-template>
+					<a mat-button routerLink="/user-profile">🐱‍👤 My profile</a>
 				</ng-container>
 
 				<a *ngIf="!(this.auth.user | async)" mat-button routerLink="/login">🔑 Login</a>

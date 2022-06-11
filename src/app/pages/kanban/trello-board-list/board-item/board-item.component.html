@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between align-items-start m-t-1_5">
 	<div class="mt-1">{{ item.description }}</div>
-	<button mat-icon-button class="icon-delete" (click)="onCardDelete(item.id)">
+	<button mat-icon-button class="icon-delete" (click)="onCardDelete(item)">
 		<mat-icon style="font-size: 18px;">delete</mat-icon>
 	</button>
 </div>
@@ -13,14 +13,14 @@
 		<mat-icon class="icon">thumb_up_off_alt</mat-icon>
 	</button>
 	<span>{{ item.like }}</span>
-	<button mat-icon-button disableRipple class="ml-2" (click)="onOpenComment()">
+	<button mat-icon-button disableRipple (click)="onOpenComment()">
 		<mat-icon class="icon">chat_bubble_outline</mat-icon>
 	</button>
-	<span>{{ item.comments.length }}</span>
+	<span>{{ item.comments?.length }}</span>
 </div>
 
 <div *ngIf="open">
-	<mat-form-field class="w-100 mb-2">
+	<mat-form-field class="comment-field">
 		<mat-label>Leave a comment</mat-label>
 		<textarea matInput [(ngModel)]="commentInput" (mousedown)="$event.stopPropagation()"></textarea>
 		<button

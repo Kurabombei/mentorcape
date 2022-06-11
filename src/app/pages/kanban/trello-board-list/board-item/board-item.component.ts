@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Card} from "../../board.model";
 
 @Component({
 	selector: 'app-board-item',
@@ -7,10 +8,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class BoardItemComponent implements OnInit {
 
-	@Input() item: any;
+	@Input() item: Card;
 	@Output() emitText: EventEmitter<{ id: number; text: string }> = new EventEmitter();
-	@Output() emitCardItem: EventEmitter<{ card: any; increase: boolean }> = new EventEmitter();
-	@Output() emitDeleteCard: EventEmitter<number> = new EventEmitter();
+	@Output() emitCardItem: EventEmitter<{ card: Card; increase: boolean }> = new EventEmitter();
+	@Output() emitDeleteCard: EventEmitter<Card> = new EventEmitter();
 
 	commentInput = ''
 	open = false;
@@ -34,7 +35,7 @@ export class BoardItemComponent implements OnInit {
 		this.emitCardItem.emit({card, increase});
 	}
 
-	onCardDelete(id: number) {
-		this.emitDeleteCard.emit(id)
+	onCardDelete(card: any) {
+		this.emitDeleteCard.emit(card)
 	}
 }

@@ -3,14 +3,14 @@
 		<div class="user-card__header">
 			<div class="user-card__title">
 				<img [src]="user.photoURL" alt="avatar" class="user-card__image" mat-card-avatar>
-				<mat-card-title>{{user.displayName}}</mat-card-title>
-				<mat-card-subtitle *ngIf="!!user.position">{{user.position}}</mat-card-subtitle>
+				<div class="text">
+					<mat-card-title class="m-t-1">{{user.displayName}}</mat-card-title>
+					<mat-card-subtitle *ngIf="!!user.position">{{user.position}}</mat-card-subtitle>
+				</div>
 			</div>
 			<div class="user-card__uid">UID: {{ user.uid }}</div>
 		</div>
-		<mat-card-content>
-			<p *ngIf="user.favoriteColor">Favorite color: {{ user.favoriteColor }}</p>
-
+		<mat-card-content class="content">
 			<ng-container *ngIf="user.isMentor; else studentContent">
 				<p class="card__email">Email: {{user.email}}</p>
 				<p class="card__email">Age: {{user.age}}</p>
@@ -29,7 +29,7 @@
 		</mat-card-content>
 		<mat-card-actions align="end">
 			<ng-container *ngIf="!isEdited; else editButtons">
-				<button (click)="afAuth.signOut()" color="warn" mat-stroked-button>Logout</button>
+				<button appLogout color="warn" mat-stroked-button>Logout</button>
 				<button (click)="startEdit()" color="accent" mat-flat-button>Edit</button>
 			</ng-container>
 
@@ -39,7 +39,7 @@
 			</ng-template>
 		</mat-card-actions>
 	</mat-card>
-	<app-become-mentor></app-become-mentor>
+	<app-become-mentor *ngIf="!user.isMentor"></app-become-mentor>
 </section>
 
 <ng-template #guest>

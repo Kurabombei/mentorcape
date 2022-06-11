@@ -4,6 +4,7 @@ import {BoardService} from "../board.service";
 import {Card} from "../board.model";
 import {BoardDialogComponent} from "../dialogs/board-dialog/board-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {NotificationService} from "../../../services/notification.service";
 
 @Component({
 	selector: 'app-trello-board-list',
@@ -15,6 +16,7 @@ export class TrelloBoardListComponent implements OnInit {
 
 	constructor(
 		public boardService: BoardService,
+		public notificationService: NotificationService,
 		public dialog: MatDialog
 	) {
 	}
@@ -22,34 +24,35 @@ export class TrelloBoardListComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	onColorChange(color: string, columnId: number) {
+	onColorChange(color: string, columnId: string) {
 		this.boardService.changeColumnColor(color, columnId)
 	}
 
-	onAddCard(text: string, columnId: number) {
+	onAddCard(text: string, columnId: string) {
 		if (text) {
+			console.log(text);
 			this.boardService.addCard(text, columnId)
 		}
 	}
 
-	onDeleteColumn(columnId: number) {
+	onDeleteColumn(columnId: string) {
 		this.boardService.deleteColumn(columnId)
 	}
 
-	onDeleteCard(cardId: number, columnId: number) {
-		this.boardService.deleteCard(cardId, columnId)
+	onDeleteCard(card: Card, columnId: string) {
+		this.boardService.deleteCard(card, columnId)
 	}
 
-	onChangeLike(event: { card: any, increase: boolean }, columnId: number) {
+	onChangeLike(event: { card: any, increase: boolean }, columnId: string) {
 		const {card: {id}, increase} = event
 		this.boardService.changeLike(id, columnId, increase)
 	}
 
-	onAddComment(event: { id: number, text: string }, columnId: number) {
+	onAddComment(event: { id: number, text: string }, columnId: string) {
 		this.boardService.addComment(columnId, event.id, event.text)
 	}
 
-	onDeleteComment(comment: { id: any; }, columnId: number, item: { id: number; }) {
+	onDeleteComment(comment: { id: any; }, columnId: string, item: { id: number; }) {
 		this.boardService.deleteComment(columnId, item.id, comment.id)
 	}
 
@@ -64,25 +67,24 @@ export class TrelloBoardListComponent implements OnInit {
 		}
 	}
 
-	openBoardDialog(): void {
-		const dialogRef = this.dialog.open(BoardDialogComponent, {
-			width: '400px',
-			data: {}
-		});
-
-		dialogRef.afterClosed().subscribe((result: any) => {
-			if (result) {
-				this.boardService.createBoard({
-					title: result,
-					priority: this.boards.length
-				});
-			}
-		});
-	}
-
-	addColumn(event: any) {
+	openBoardDialog(event: any): void {
 		if (event) {
-			this.boardService.addColumn(event)
+			const dialogRef = this.dialog.open(BoardDialogComponent, {
+				width: '400px',
+				data: {}
+			});
+
+			dialogRef.afterClosed().subscribe((result: any) => {
+				if (result) {
+					this.boardService.addBoardColumn(result).then(r => {
+						console.log(r);
+						this.notificationService.addSuccess(`Board ${result} is successfully added!`);
+					}, err => {
+						console.log(err);
+						this.notificationService.addError(`Board ${result} was not added! ${err}`);
+					});
+				}
+			});
 		}
 	}
 }

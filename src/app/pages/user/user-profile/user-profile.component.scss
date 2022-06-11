@@ -7,6 +7,10 @@
 .user-card {
 	font-size: 1.25rem;
 
+	.content {
+		padding: 1rem;
+	}
+
 	&__header {
 		display: flex;
 		justify-content: space-between;
@@ -17,12 +21,15 @@
 		padding: 2px;
 		border: 6px solid $accent;
 		border-radius: 50%;
+		margin-right: 1rem;
 	}
 
 	&__title {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		justify-content: space-around;
+		align-items: center;
+
 	}
 
 	&__uid {

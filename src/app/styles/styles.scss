@@ -120,6 +120,14 @@ body {
 	animation-direction: alternate;
 }
 
+.m-1 {
+	margin: 1rem;
+}
+
+.p-1 {
+	padding: 1rem;
+}
+
 .m-t-0_5 {
 	margin-top: 0.5rem;
 }
@@ -151,7 +159,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 
-gradient {
+.gradient {
 	@include gradient-text(#ffcc00, #ff4b4b);
 }
 
@@ -187,7 +195,6 @@ h5 {
 .main-container {
 	max-width: 73.125rem; // 12 columns (width: 4.375rem; margin: 1.875rem;)
 	margin: 4rem auto;
-	width: 100%;
 
 	@media screen and(max-width: 1440px) {
 	}
@@ -395,6 +402,10 @@ h5 {
 	display: flex;
 }
 
+.w-100 {
+	width: 100%;
+}
+
 .justify-content {
 	&-between {
 		justify-content: space-between;
@@ -423,5 +434,52 @@ h5 {
 		align-items: end;
 	}
 
+}
+
+.default-select {
+	.mat-select-value-text {
+		position: absolute;
+		font-size: 0.875rem;
+		font-weight: 500;
+		left: 1rem;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.mat-form-field-wrapper {
+		.mat-select-arrow-wrapper {
+			position: absolute;
+			top: 50%;
+			right: 1rem;
+		}
+	}
+
+	.mat-form-field-flex {
+		height: 2.5rem;
+
+		.mat-form-field-infix {
+			position: static;
+		}
+	}
+
+	.mat-select-trigger {
+		position: static;
+		width: 100%;
+
+		.mat-select-arrow {
+			color: var($main-dark);
+		}
+	}
+
+	mat-form-field {
+		width: 100%;
+	}
+
+	.mat-focused {
+		.mat-form-field-flex {
+			border: 1px solid var($main-dark);
+			box-shadow: 0 0 0 3px rgba(70, 185, 255, 0.12);
+		}
+	}
 }
 

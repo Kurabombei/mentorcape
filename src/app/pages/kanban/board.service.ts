@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {switchMap} from 'rxjs/operators';
-import {Board, Card, Column, Comment, Task} from './board.model';
+import {Card, Column, Comment} from './board.model';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import firebase from "firebase/compat/app";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
 
 
 @Injectable({
@@ -13,8 +13,8 @@ import {BehaviorSubject} from "rxjs";
 export class BoardService {
 	private initBoard = [
 		{
-			id: 1,
-			uid: 1,
+			id: 'ASDASDASD2DADW',
+			uid: 'ASDASDASD2DADW',
 			title: 'To Do',
 			color: '#009886',
 			priority: 1,
@@ -27,7 +27,7 @@ export class BoardService {
 					comments: [
 						{
 							id: 1,
-							uid: 1,
+							uid: 'ASDASDASD2DADW',
 							text: 'Some comment'
 						}
 					]
@@ -35,8 +35,8 @@ export class BoardService {
 			]
 		},
 		{
-			id: 2,
-			uid: 2,
+			id: 'ASDASDASD2DADW',
+			uid: 'ASDASDASD2DADW',
 			title: 'In progress',
 			color: '#009886',
 			priority: 2,
@@ -49,7 +49,7 @@ export class BoardService {
 					comments: [
 						{
 							id: 1,
-							uid: 2,
+							uid: 'ASDASDASD2DADW',
 							text: 'Some comment'
 						}
 					]
@@ -57,8 +57,8 @@ export class BoardService {
 			]
 		},
 		{
-			id: 3,
-			uid: 3,
+			id: '3332ASDASDAS',
+			uid: '3332ASDASDAS',
 			title: 'Done',
 			color: '#009886',
 			priority: 3,
@@ -71,7 +71,7 @@ export class BoardService {
 					comments: [
 						{
 							id: 1,
-							uid: 3,
+							uid: '3asASDASsada',
 							text: 'Some comment'
 						}
 					]
@@ -79,16 +79,31 @@ export class BoardService {
 			]
 		},
 	]
-	private board: Column[] = this.initBoard
-	private board$ = new BehaviorSubject<Column[]>(this.initBoard)
+	private boards: Column[] = [];
+	private board$ = new BehaviorSubject<Column[]>([]);
+	private sub: Subscription = new Subscription();
 
 	constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
+		let boardsSub = this.getUserBoards()
+			.subscribe(boards => {
+				console.log('boards from back')
+				this.boards = boards;
+				this.changeBoard$ = [...this.boards];
+			});
+
+		this.sub.add(boardsSub);
+	}
+
+	set changeBoard$(value: Column[]) {
+		this.board$.next(value);
+		console.log(`Board state was changed. Emitting`);
+		console.dir(value);
 	}
 
 	/**
 	 * Creates a new board for the current user
 	 */
-	async createBoard(data: Board) {
+	async createBoard(data: Column) {
 		const user = await this.afAuth.currentUser;
 		return this.db.collection('boards').add({
 			...data,
@@ -98,35 +113,37 @@ export class BoardService {
 	}
 
 	async createDefaultTasks() {
-		let boards: Board[] = [
+		let boards: Column[] = [
 			{
-				title: 'To do',
+				id: '3332ASDASDAS',
+				uid: '3332ASDASDAS',
+				color: '#009886',
+				title: 'Done',
 				priority: 0,
-				tasks: [{description: 'Drag and drop me!', label: 'yellow'}]
+				tasks: [{id: 1001, description: 'Drag and drop me!', label: 'yellow'}]
 			},
 			{
+				id: '3332ASDASDAS',
+				uid: '3332ASDASDAS',
+				color: '#009886',
 				title: 'In progress',
 				priority: 1,
-				tasks: [{description: 'Drag and drop me!', label: 'blue'}]
+				tasks: [{id: 1001, description: 'Drag and drop me!', label: 'blue'}]
 			},
 			{
+				id: '3332ASDASDAS',
+				uid: '3332ASDASDAS',
+				color: '#009886',
 				title: 'Done',
 				priority: 2,
-				tasks: [{description: 'Drag and drop me!', label: 'purple'}]
+				tasks: [{id: 1001, description: 'Drag and drop me!', label: 'purple'}]
 			}]
 
 		const db = firebase.firestore();
 		const batch = db.batch();
 		const refs = boards.map(b => db.collection('boards').doc());
-		refs.forEach((ref, idx) => batch.update(ref, {priority: idx}));
+		refs.forEach((ref, idx) => batch.update(ref, boards[idx]));
 		batch.commit();
-
-		const user = await this.afAuth.currentUser;
-		return this.db.collection('boards').add({
-			title: 'To do',
-			priority: 0,
-			tasks: [{description: 'To get to know MentorCape.'}]
-		})
 	}
 
 	/**
@@ -142,7 +159,7 @@ export class BoardService {
 	/**
 	 * Updates the tasks on board
 	 */
-	updateTasks(boardId: string, tasks: Task[]) {
+	updateTasks(boardId: string, tasks: Card[]) {
 		return this.db
 			.collection('boards')
 			.doc(boardId)
@@ -152,7 +169,7 @@ export class BoardService {
 	/**
 	 * Remove a specific task from the board
 	 */
-	removeTask(boardId: string, task: Task) {
+	removeTask(boardId: string, task: Card) {
 		return this.db
 			.collection('boards')
 			.doc(boardId)
@@ -169,7 +186,7 @@ export class BoardService {
 			switchMap(user => {
 				if (user) {
 					return this.db
-						.collection<Board>('boards', ref =>
+						.collection<Column>('boards', ref =>
 							ref.where('uid', '==', user.uid).orderBy('priority')
 						)
 						.valueChanges({idField: 'id'});
@@ -183,7 +200,7 @@ export class BoardService {
 	/**
 	 * Run a batch write to change the priority of each board for sorting
 	 */
-	sortBoards(boards: Board[]) {
+	sortBoards(boards: Column[]) {
 		const db = firebase.firestore();
 		const batch = db.batch();
 		const refs = boards.map(b => db.collection('boards').doc(b.id));
@@ -191,69 +208,107 @@ export class BoardService {
 		batch.commit();
 	}
 
-	getBoard$() {
-		return this.board$.asObservable()
+	getBoard$(): Observable<Column[]> {
+		return this.board$.asObservable();
 	}
 
-	changeColumnColor(color: string, columnId: number) {
-		this.board = this.board.map((column: Column) => {
-			if (column.id === columnId) {
-				column.color = color;
-			}
-			return column;
-		});
-		this.board$.next([...this.board]);
+	changeColumnColor(color: string, columnId: string) {
+		return this.db.collection('boards').doc(columnId).update({color})
 	}
 
-	addColumn(title: string) {
+	async addBoardColumn(title: string) {
+
+		const user = await this.afAuth.currentUser;
+		let ref = this.db.collection('boards').doc().get();
+
 		const newColumn: Column = {
-			uid: 0,
-			id: Date.now(),
+			id: `${ref}`,
+			uid: user!.uid,
 			title: title,
 			color: '#009886',
+			priority: this.boards.length,
 			tasks: []
 		};
 
-		this.board = [...this.board, newColumn];
-		this.board$.next([...this.board]);
+		this.boards = [...this.boards, newColumn];
+		this.changeBoard$ = [...this.boards];
+		return this.db.collection('boards').add(newColumn);
 	}
 
-	addCard(text: string, columnId: number) {
-		const newCard: Card = {
-			id: Date.now(),
-			description: text,
-			like: 0,
-			comments: [],
-		};
+	async addCard(description: string, columnId: string) {
+		const newCard = {
+			id: 0,
+			description: description,
+			label: 'blue',
+			like: 1,
+			comments: [{
+				id: 0,
+				uid: '0',
+				text: 'First comment',
+			}]
+		}
+		let selectedBoard = this.boards.filter(board => board.id == columnId)[0];
+		if (!selectedBoard) {
+			return 0;
+		}
 
-		this.board = this.board.map((column: Column) => {
-			if (column.id === columnId) {
-				column.tasks = [newCard, ...column.tasks];
-			}
-			return column;
-		});
 
-		this.board$.next([...this.board]);
+		console.log('OLD TASKS', selectedBoard.tasks)
+		const tasks: Card[] = [newCard, ...selectedBoard.tasks];
+		console.log('new TASKS', tasks)
+
+		return this.db.collection('boards').doc(columnId)
+			.update({tasks})
+		// const tasks: Card[] = this.board.filter((board) => board.id === columnId).map((board) => board.tasks[0])
+		//
+		// const newCard = {
+		// 	id: Math.floor(Math.random() * 1000),
+		// 	description: description,
+		// 	like: 0,
+		// 	label: 'blue',
+		// 	comments: [],
+		// };
+		//
+		// this.board = this.board.map((column: Column) => {
+		// 	if (column.id === columnId) {
+		// 		column.tasks = [newCard, ...column.tasks];
+		// 	}
+		// 	return column;
+		// });
+		// console.log([newCard, ...tasks]);
+		//
+		// this.changeBoard$ = [...this.board];
+		//
+		// console.log('COLUMNID', columnId);
+		// console.log('this.board', this.board);
+		// console.dir(this.board);
+		// console.log('NEW CARD', newCard);
+		// console.log('TASKS', tasks);
+		// if (!!tasks) {
+		// 	return this.db
+		// 		.collection('boards')
+		// 		.doc(columnId)
+		// 		.update({tasks: [newCard, ...tasks]});
+		// } else {
+		// 	return this.db
+		// 		.collection('boards')
+		// 		.doc(columnId)
+		// 		.update({tasks: [newCard]});
+		// }
 	}
 
-	deleteColumn(columnId: number) {
-		this.board = this.board.filter((column: Column) => column.id !== columnId);
-		this.board$.next([...this.board]);
+	deleteColumn(columnId: string) {
+		this.boards = this.boards.filter((column: Column) => column.id !== columnId);
+		this.changeBoard$ = [...this.boards];
+		return this.deleteBoard(columnId);
 	}
 
-	deleteCard(cardId: number, columnId: number) {
-		this.board = this.board.map((column: Column) => {
-			if (column.id === columnId) {
-				column.tasks = column.tasks.filter((card: Card) => card.id !== cardId);
-			}
-			return column;
-		});
-
-		this.board$.next([...this.board]);
+	deleteCard(card: Card, columnId: string) {
+		return this.removeTask(columnId, card);
 	}
 
-	changeLike(cardId: number, columnId: number, increase: boolean) {
-		this.board = this.board.map((column: Column) => {
+	changeLike(cardId: number, columnId: string, increase: boolean) {
+		this.boards = this.boards.map((column: Column) => {
 			if (column.id === columnId) {
 				const taskList = column.tasks.map((card: Card) => {
 					if (!!card.like && card.id === cardId) {
@@ -275,11 +330,11 @@ export class BoardService {
 			}
 		});
 
-		this.board$.next([...this.board]);
+		this.changeBoard$ = [...this.boards];
 	}
 
-	addComment(columnId: number, cardId: number, text: string) {
-		this.board = this.board.map((column: Column) => {
+	addComment(columnId: string, cardId: number, text: string) {
+		this.boards = this.boards.map((column: Column) => {
 			if (column.id === columnId) {
 				const taskList = column.tasks.map((card: Card) => {
 					if (card.id === cardId) {
@@ -298,11 +353,11 @@ export class BoardService {
 			return column;
 		});
 
-		this.board$.next([...this.board]);
+		this.changeBoard$ = [...this.boards];
 	}
 
-	deleteComment(columnId: number, itemId: number, commentId: any) {
-		this.board = this.board.map((column: Column) => {
+	deleteComment(columnId: string, itemId: number, commentId: any) {
+		this.boards = this.boards.map((column: Column) => {
 			if (column.id === columnId) {
 				const taskList = column.tasks.map((item) => {
 					if (!!item.comments && item.id === itemId) {
@@ -316,6 +371,6 @@ export class BoardService {
 			}
 			return column
 		})
-		this.board$.next([...this.board])
+		this.board$.next([...this.boards])
 	}
 }

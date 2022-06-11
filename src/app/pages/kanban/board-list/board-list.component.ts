@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {Subscription} from 'rxjs';
-import {Board} from '../board.model';
+import {Column} from '../board.model';
 import {BoardService} from '../board.service';
 import {MatDialog} from "@angular/material/dialog";
 import {BoardDialogComponent} from "../dialogs/board-dialog/board-dialog.component";
@@ -12,7 +12,7 @@ import {BoardDialogComponent} from "../dialogs/board-dialog/board-dialog.compone
 	styleUrls: ['./board-list.component.scss']
 })
 export class BoardListComponent implements OnInit, OnDestroy {
-	boards: Board[] = [];
+	boards: Column[] = [];
 	sub: Subscription = new Subscription();
 	todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
@@ -44,10 +44,9 @@ export class BoardListComponent implements OnInit, OnDestroy {
 
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
-				this.boardService.createBoard({
-					title: result,
-					priority: this.boards.length
-				});
+				this.boardService.addBoardColumn(result).then(r => {
+					console.log(r);
+				})
 			}
 		});
 	}

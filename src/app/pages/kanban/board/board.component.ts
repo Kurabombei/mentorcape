@@ -3,6 +3,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
 import {BoardService} from "../board.service";
 import {MatDialog} from "@angular/material/dialog";
 import {TaskDialogComponent} from "../dialogs/task-dialog/task-dialog.component";
+import {Card} from "../board.model";
 
 @Component({
 	selector: 'app-board',
@@ -33,7 +34,7 @@ export class BoardComponent {
 	}
 
 
-	openDialog(task?: Task, idx?: number): void {
+	openDialog(task?: Card, idx?: number): void {
 		const newTask = {label: 'purple'};
 		const dialogRef = this.dialog.open(TaskDialogComponent, {
 			width: '500px',

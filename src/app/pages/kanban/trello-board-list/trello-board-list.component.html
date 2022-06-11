@@ -9,32 +9,34 @@
 					<button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
 						<mat-icon style="font-size: 20px;">delete</mat-icon>
 					</button>
+
 				</mat-card-header>
-
-				<!-- Add New Card To Column -->
-				<app-dialog (emitText)="onAddCard($event, column.id)"
-										[question]="'Add new card in ' + column.title + ' column'">
-					<button mat-raised-button class="w-100 mb-1 btn-add">+</button>
-				</app-dialog>
-
-				<!-- Color Panel -->
-				<app-color-panel (emitColor)="onColorChange($event, column.id)"></app-color-panel>
-
-				<div cdkDropList [cdkDropListData]="column.tasks" class="example-list" (cdkDropListDropped)="drop($event)">
-					<div cdkDrag class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.tasks">
-						<app-board-item
-							[item]="item"
-							(emitText)="onAddComment($event, column.id)"
-							(emitCardItem)="onChangeLike($event, column.id)"
-							(emitDeleteCard)="onDeleteCard($event, column.id)"
-						>
-							<div *ngFor="let comment of item.comments">
-								<app-comment-item [comment]="comment"
-																	(emitComment)="onDeleteComment($event, column.id, item)"></app-comment-item>
-							</div>
-						</app-board-item>
+				<mat-card-content>
+					<div class="d-flex justify-content-between p-1">
+						<!-- Color Panel -->
+						<app-color-panel (emitColor)="onColorChange($event, column.id)"></app-color-panel>
+						<!-- Add New Card To Column -->
+						<app-dialog (emitText)="onAddCard($event, column.id)"
+												[question]="'Add new card in ' + column.title + ' column'">
+							<button mat-raised-button class="w-100 mb-1 btn-add">+</button>
+						</app-dialog>
 					</div>
-				</div>
+					<div cdkDropList [cdkDropListData]="column.tasks" class="example-list" (cdkDropListDropped)="drop($event)">
+						<div cdkDrag class="example-box" [ngStyle]="{background: column.color}" *ngFor="let item of column.tasks">
+							<app-board-item
+								[item]="item"
+								(emitText)="onAddComment($event, column.id)"
+								(emitCardItem)="onChangeLike($event, column.id)"
+								(emitDeleteCard)="onDeleteCard($event, column.id)"
+							>
+								<div *ngFor="let comment of item.comments">
+									<app-comment-item [comment]="comment"
+																		(emitComment)="onDeleteComment($event, column.id, item)"></app-comment-item>
+								</div>
+							</app-board-item>
+						</div>
+					</div>
+				</mat-card-content>
 			</mat-card>
 		</div>
 		<div class="board-button">
@@ -42,7 +44,7 @@
 				mat-raised-button
 				color="accent"
 				cdkDragDisabled
-				(click)="addColumn($event)"
+				(click)="openBoardDialog($event)"
 			>
 				New Board
 			</button>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
+import {MentorService} from "../../../services/mentor.service";
 
 @Component({
 	selector: 'app-email-login',
@@ -14,9 +15,8 @@ export class EmailLoginComponent implements OnInit {
 	loading = false;
 
 	serverMessage: string = '';
-	private sampleUsers: any;
 
-	constructor(private fb: FormBuilder, private auth: AuthService) {
+	constructor(private fb: FormBuilder, private auth: AuthService, private mentorService: MentorService) {
 		this.form = this.fb.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(6)]],
@@ -77,8 +77,9 @@ export class EmailLoginComponent implements OnInit {
 
 		try {
 			if (this.isLogin) {
-				await this.auth.loginWithEmail(email, password).then(res => {
+				await this.auth.loginWithEmail(email, password).then((res) => {
 					if (res) {
+						this.mentorService.checkState();
 						this.auth.isLoggedIn = true;
 					}
 				}, error => {
@@ -102,6 +103,6 @@ export class EmailLoginComponent implements OnInit {
 	}
 
 	async createSampleUsers() {
-		await this.auth.createSampleUsers(15);
+		await this.auth.createSampleUsers(2);
 	}
 }
