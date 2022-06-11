@@ -10,14 +10,7 @@
 				<mat-card-subtitle *ngIf="!!mentor.position" class="card__subtitle">{{mentor.position}}</mat-card-subtitle>
 			</mat-card-header>
 			<mat-card-content>
-				<p class="card__prop">Age: {{mentor.age}}</p>
 				<p class="card__prop">Location: {{mentor.location}}</p>
-				<p class="card__prop">Languages: {{mentor.languages}}</p>
-				<p class="card__prop">Description: {{mentor.description}}</p>
-				<p class="card__prop">Position: {{mentor.position}}</p>
-				<p class="card__prop">Role: {{mentor.role}}</p>
-				<p class="card__prop">Industry: {{mentor.industry}}</p>
-				<p class="card__prop">Categories: {{mentor.categories}}</p>
 			</mat-card-content>
 			<mat-card-footer>
 				<mat-card-actions align="end">
@@ -26,7 +19,7 @@
 						(click)="navigateToUrl(mentor.socialLink)"
 						class="main-button main-button--x-lg"
 						color="accent"
-						target="_blank">Book an intro call
+						target="_blank">Book an intro call!
 					</button>
 				</mat-card-actions>
 			</mat-card-footer>

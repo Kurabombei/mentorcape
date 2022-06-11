@@ -23,7 +23,7 @@
 				</ng-template>
 			</ng-container>
 			<a (click)="drawer.close()" mat-list-item routerLink="/user-profile">🐱‍👤 My profile</a>
-			<a (click)="drawer.close()" mat-list-item appLogout>👤 Log out</a>
+			<a (click)="drawer.close()" mat-list-item appLogout routerLink="/">👤 Log out</a>
 
 			<!--			<a (click)="drawer.close()" mat-list-item routerLink="/faq">⚡ FAQ</a>-->
 			<!--			<a (click)="drawer.close()" mat-list-item routerLink="/about-us">⚡ About MentorCape</a>-->
@@ -62,6 +62,7 @@
 						<a mat-button routerLink="/card-grid/mentors">⚡ All mentors</a>
 					</ng-template>
 					<a mat-button routerLink="/user-profile">🐱‍👤 My profile</a>
+					<a mat-button appLogout routerLink="/">👤 Log out</a>
 				</ng-container>
 
 				<a *ngIf="!(this.auth.user | async)" mat-button routerLink="/login">🔑 Login</a>

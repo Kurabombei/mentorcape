@@ -12,18 +12,18 @@
 		</div>
 		<mat-card-content class="content">
 			<ng-container *ngIf="user.isMentor; else studentContent">
-				<p class="card__email">Email: {{user.email}}</p>
-				<p class="card__email">Age: {{user.age}}</p>
-				<p class="card__email">Location: {{user.location}}</p>
-				<p class="card__email">Languages: {{user.languages}}</p>
+				<p class="card__email" *ngIf="!!user.email">Email: {{user.email}}</p>
+				<p class="card__email" *ngIf="!!user.age">Age: {{user.age}}</p>
+				<p class="card__email" *ngIf="!!user.location">Location: {{user.location}}</p>
+				<p class="card__email" *ngIf="!!user.languages">Languages: {{user.languages}}</p>
 				<p class="card__email">Students: {{user.students}}</p>
 			</ng-container>
 
 			<ng-template #studentContent>
-				<p class="card__email">Email: {{user.email}}</p>
-				<p class="card__email">Age: {{user.age}}</p>
-				<p class="card__email">Location: {{user.location}}</p>
-				<p class="card__email">Languages: {{user.languages}}</p>
+				<p class="card__email" *ngIf="!!user.email">Email: {{user.email}}</p>
+				<p class="card__email" *ngIf="!!user.age">Age: {{user.age}}</p>
+				<p class="card__email" *ngIf="!!user.location">Location: {{user.location}}</p>
+				<p class="card__email" *ngIf="!!user.languages">Languages: {{user.languages}}</p>
 				<p class="card__email">Mentors: {{user.mentors}}</p>
 			</ng-template>
 		</mat-card-content>
