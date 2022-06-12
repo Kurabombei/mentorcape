@@ -1,7 +1,7 @@
 <section class="media-container">
 	<h2>Meet our mentors</h2>
 	<div class="mentors-grid">
-		<mat-card class="card" *ngFor="let mentor of mentors">
+		<mat-card class="card mentor-card" *ngFor="let mentor of mentors">
 			<mat-card-header>
 				<img *ngIf="mentor.photoURL === ''" [src]="'https://robohash.org/' + mentor.uid" alt="No avatar provided"
 						 class="card__avatar">

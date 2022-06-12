@@ -17,10 +17,10 @@ export class OurMentorsComponent implements OnInit {
 
 			isMentor: true,
 
-			displayName: 'John Travolta',
-			position: 'Actor',
-			location: 'The USA',
-			photoURL: 'https://akns-images.eonline.com/eol_images/Entire_Site/2015122/rs_634x1024-150222213607-634.John-Travolta-Academy-Awards.ms.022215.jpg?fit=around%7C634:1024&output-quality=90&crop=634:1024;center,top',
+			displayName: 'John Brown',
+			position: 'Front-end dev at Stobox',
+			location: 'The USA, Washington',
+			photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHdLZAJzeEA2iYjsrN4CEXrg8ATQ1tB04blQ&usqp=CAU',
 			socialLink: 'https://calendly.com/volos-work/30min?month=2022-06'
 		},
 		{
@@ -29,10 +29,10 @@ export class OurMentorsComponent implements OnInit {
 
 			isMentor: true,
 
-			displayName: 'John Doe',
-			position: 'Actor',
-			location: 'The USA',
-			photoURL: 'https://akns-images.eonline.com/eol_images/Entire_Site/2015122/rs_634x1024-150222213607-634.John-Travolta-Academy-Awards.ms.022215.jpg?fit=around%7C634:1024&output-quality=90&crop=634:1024;center,top',
+			displayName: 'Jack Volos',
+			position: 'Blockchain developer at Stobox',
+			location: 'Ukraine, Lviv',
+			photoURL: 'https://lh3.googleusercontent.com/a-/AOh14GjQT86sqMj8PVl34d6hTzAmaWXzYr1WR6kPElYE=s96-c',
 			socialLink: 'https://calendly.com/volos-work/30min?month=2022-06'
 		}, {
 			uid: 'asd',
@@ -40,10 +40,10 @@ export class OurMentorsComponent implements OnInit {
 
 			isMentor: true,
 
-			displayName: 'John Travolta',
-			position: 'Actor',
-			location: 'The USA',
-			photoURL: 'https://akns-images.eonline.com/eol_images/Entire_Site/2015122/rs_634x1024-150222213607-634.John-Travolta-Academy-Awards.ms.022215.jpg?fit=around%7C634:1024&output-quality=90&crop=634:1024;center,top',
+			displayName: 'Jake Jillenhall',
+			position: 'Java Developer',
+			location: 'The USA, California',
+			photoURL: 'https://oodp.ca/media/tutor-8.jpg',
 			socialLink: 'https://calendly.com/volos-work/30min?month=2022-06'
 		}
 	];
