@@ -3,6 +3,7 @@
 .step-list {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(200px, 1fr));
+	grid-template-rows: repeat(3, auto);
 	gap: 28px;
 	text-align: center;
 
@@ -26,10 +27,10 @@
 			margin: 0 auto 1rem;
 			justify-content: center;
 
-			height: 30%;
+			height: 120px;
 			box-sizing: border-box;
 			border-radius: 50%;
-			background: $white;
+
 			padding: 1rem;
 			aspect-ratio: 1 / 1;
 		}

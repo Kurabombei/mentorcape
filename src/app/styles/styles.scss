@@ -12,6 +12,10 @@
 .theme-dark {
 	@include mat.all-component-themes($mentocape-dark-theme);
 
+	.invertible {
+		filter: invert(1);
+	}
+
 	.mat-drawer-container {
 		background-color: #121212;
 		color: mat.get-color-from-palette($cyan, 50);
@@ -59,6 +63,10 @@
 
 .theme-light {
 	@include mat.all-component-themes($mentocape-light-theme);
+
+	.invertible {
+		filter: invert(0);
+	}
 
 	.mat-drawer-container {
 		background-color: $light-blue;
