@@ -31,7 +31,10 @@ export class ShellComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		const mentorSub = this.mentorService.getState()
-			.subscribe(event => this.mentorState = event);
+			.subscribe(event => {
+				console.log('event', event);
+				this.mentorState = event;
+			});
 
 		this.subscription.add(mentorSub);
 	}

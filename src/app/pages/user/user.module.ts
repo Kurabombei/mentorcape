@@ -12,6 +12,12 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
 import {BecomeMentorComponent} from './user-profile/become-mentor/become-mentor.component';
 import {MentorFormComponent} from './user-profile/mentor-form/mentor-form.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import {StudentDetailComponent} from './student-detail/student-detail.component';
+import {MentorDetailComponent} from './mentor-detail/mentor-detail.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {KanbanModule} from "../kanban/kanban.module";
+import {BriefUserInfoComponent} from './brief-user-info/brief-user-info.component';
+import {MentorDashboardModule} from "../mentor-dashboard/mentor-dashboard.module";
 
 
 @NgModule({
@@ -22,6 +28,9 @@ import {MatStepperModule} from "@angular/material/stepper";
 		UserProfileComponent,
 		BecomeMentorComponent,
 		MentorFormComponent,
+		StudentDetailComponent,
+		MentorDetailComponent,
+		BriefUserInfoComponent,
 	],
 	imports: [
 		CommonModule,
@@ -30,6 +39,9 @@ import {MatStepperModule} from "@angular/material/stepper";
 		FormsModule,
 		ReactiveFormsModule,
 		MatStepperModule,
+		MatGridListModule,
+		KanbanModule,
+		MentorDashboardModule,
 	],
 	exports: [],
 	providers: [

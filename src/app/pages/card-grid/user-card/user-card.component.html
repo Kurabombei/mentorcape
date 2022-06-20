@@ -36,7 +36,7 @@
 			<ng-container *ngIf="isMentor; else studentActions">
 				<button
 					mat-stroked-button
-					[routerLink]="['mentors/view/' + user.uid]"
+					[routerLink]="['/mentor/' + user.uid]"
 					class="main-button--x-lg"
 					color="warn"
 				>Show more!
@@ -51,6 +51,13 @@
 			</ng-container>
 
 			<ng-template #studentActions>
+				<button
+					mat-stroked-button
+					[routerLink]="['/student/' + user.uid]"
+					class="main-button--x-lg"
+					color="warn"
+				>Show more!
+				</button>
 			</ng-template>
 		</mat-card-actions>
 	</mat-card-footer>

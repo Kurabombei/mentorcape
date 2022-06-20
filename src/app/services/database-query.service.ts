@@ -4,6 +4,7 @@ import {Board} from "../pages/kanban/board.model";
 import {User} from "../core/models/user";
 import {switchMap} from "rxjs/operators";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {of, take} from "rxjs";
 
 @Injectable({
 	providedIn: 'root'
@@ -52,7 +53,7 @@ export class DatabaseQueryService {
 		);
 	}
 
-	// get all mentors
+	// get top 3 mentors
 	getTopMentors() {
 		return this.afAuth.authState.pipe(
 			switchMap(user => {
@@ -69,15 +70,29 @@ export class DatabaseQueryService {
 		);
 	}
 
+	// get 1 student details
+	getStudentDetails(studentId: string) {
+		return this.afAuth.authState.pipe(
+			switchMap(user => {
+				if (!!user) {
+					return this.db.collection<any>('users').doc(studentId).get().pipe(take(1));
+				} else {
+					return of(null);
+					;
+				}
+			})
+		);
+	}
+
 	// get 1 mentor details
 	getMentorDetails(mentorId: string) {
-		return this.db.collection('users').doc(mentorId)
+		return this.db.collection('users').doc(mentorId);
 	}
 
 	// get all students by mentorId
 	getStudentsById(mentorId: string) {
 		return this.db.collection('users', studentRef =>
-			studentRef.where('mentorId', '==', 'mentorId'))
+			studentRef.where('mentorId', '==', mentorId))
 	}
 
 	// get all tasks by studentId

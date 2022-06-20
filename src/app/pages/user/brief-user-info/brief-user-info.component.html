@@ -1,0 +1,13 @@
+<mat-card class="brief-card">
+	<mat-card-title-group>
+		<img mat-card-lg-image class="card__avatar" [src]="user.photoURL">
+		<mat-card-title class="m-t-1">{{user.displayName}}</mat-card-title>
+		<mat-card-subtitle *ngIf="!!user.position">{{user.position}}</mat-card-subtitle>
+	</mat-card-title-group>
+	<mat-card-content>
+		<p class="card__email" *ngIf="!!user.email">Email: {{user.email}}</p>
+		<p class="card__email" *ngIf="!!user.age">Age: {{user.age}}</p>
+		<p class="card__email" *ngIf="!!user.location">Location: {{user.location}}</p>
+		<p class="card__email" *ngIf="!!user.languages">Languages: {{user.languages}}</p>
+	</mat-card-content>
+</mat-card>

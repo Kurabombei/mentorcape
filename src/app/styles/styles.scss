@@ -16,6 +16,10 @@
 		filter: invert(1);
 	}
 
+	.grid-list {
+		background-color: rgba(255, 255, 255, 0.1);
+	}
+
 	.mat-drawer-container {
 		background-color: #121212;
 		color: mat.get-color-from-palette($cyan, 50);
@@ -66,6 +70,10 @@
 
 	.invertible {
 		filter: invert(0);
+	}
+
+	.grid-list {
+		background-color: rgba(0, 0, 0, 0.1);
 	}
 
 	.mat-drawer-container {
@@ -486,5 +494,9 @@ h5 {
 			box-shadow: 0 0 0 3px rgba(70, 185, 255, 0.12);
 		}
 	}
+}
+
+.default-tile {
+	display: flex;
 }
 

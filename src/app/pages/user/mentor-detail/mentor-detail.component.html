@@ -1,0 +1,43 @@
+<section *ngIf="mentorInfo as user; else loader">
+	<div class="grid-list">
+		<div class="student-info">
+			<h3>Mentor information</h3>
+			<div class="content">
+				<app-brief-user-info [user]="user"></app-brief-user-info>
+			</div>
+		</div>
+		<div class="mentor-info">
+			<h3>His students</h3>
+			<div class="content">
+				<mat-card class="card mentor-card" *ngIf="!!user.mentorID; else noStudentsProvided">
+					<mat-card-header>
+						<img *ngIf="user.photoURL === ''" [src]="'https://robohash.org/' + user.uid" alt="No avatar provided"
+								 class="card__avatar">
+						<img *ngIf="user.photoURL !== ''" [src]="user.photoURL" alt="No avatar provided" class="card__avatar">
+						<mat-card-title class="card__title">{{user.displayName}}</mat-card-title>
+						<mat-card-subtitle *ngIf="!!user.position" class="card__subtitle">{{user.position}}</mat-card-subtitle>
+					</mat-card-header>
+					<mat-card-content>
+						<p class="card__prop">Location: {{user.location}}</p>
+					</mat-card-content>
+				</mat-card>
+				<ng-template #noStudentsProvided>
+					<mat-card>
+						<mat-card-content>
+							<h2 class="gradient">This mentor does not have a padawan yet.</h2>
+						</mat-card-content>
+					</mat-card>
+				</ng-template>
+			</div>
+		</div>
+		<div class="student-tasks">
+			<h3>Statistics</h3>
+			<app-dashboard-mentor-accomplishements></app-dashboard-mentor-accomplishements>
+
+			<!--			<app-trello-board-list [selectedID]="user.uid"></app-trello-board-list>-->
+		</div>
+	</div>
+</section>
+<ng-template #loader>
+	<app-loader></app-loader>
+</ng-template>

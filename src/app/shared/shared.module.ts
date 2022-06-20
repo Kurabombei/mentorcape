@@ -22,6 +22,7 @@ import {FormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {LogoutDirective} from "./directives/logout.directive";
+import {LoaderComponent} from './loader/loader.component';
 
 const components = [ShellComponent, DeleteButtonComponent, LogoutDirective];
 
@@ -45,11 +46,12 @@ const modules = [
 ];
 
 @NgModule({
-	declarations: [...components],
+	declarations: [...components, LoaderComponent],
 	imports: [...modules, MatSlideToggleModule, FormsModule],
 	exports: [
 		...components,
 		...modules,
+		LoaderComponent,
 	]
 })
 export class SharedModule {

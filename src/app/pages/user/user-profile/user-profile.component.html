@@ -11,21 +11,59 @@
 			<div class="user-card__uid">UID: {{ user.uid }}</div>
 		</div>
 		<mat-card-content class="content">
-			<ng-container *ngIf="user.isMentor; else studentContent">
-				<p class="card__email" *ngIf="!!user.email">Email: {{user.email}}</p>
-				<p class="card__email" *ngIf="!!user.age">Age: {{user.age}}</p>
-				<p class="card__email" *ngIf="!!user.location">Location: {{user.location}}</p>
-				<p class="card__email" *ngIf="!!user.languages">Languages: {{user.languages}}</p>
-				<p class="card__email">Students: {{user.students}}</p>
-			</ng-container>
+			<form [formGroup]="form" class="default-form">
+				<ng-container *ngIf="user.isMentor; else studentContent">
+					<mat-form-field appearance="outline" *ngIf="!!user.email">
+						<mat-label>Email:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" placeholder="musk@example.com"
+									 formControlName="email"
+									 required>
+						<mat-error *ngIf="_f('email')?.invalid">{{getErrorMessage()}}</mat-error>
+					</mat-form-field>
+					<mat-form-field appearance="outline" *ngIf="!!user.age">
+						<mat-label>Age:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" formControlName="age">
+					</mat-form-field>
+					<mat-form-field appearance="outline" *ngIf="!!user.location">
+						<mat-label>Location:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" formControlName="location">
+					</mat-form-field>
+					<mat-form-field appearance="outline" *ngIf="!!user.languages">
+						<mat-label>Languages:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" formControlName="languages">
+					</mat-form-field>
+					<mat-form-field appearance="outline" *ngIf="!!user.students && user.students!.length > 0">
+						<mat-label>Students:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" formControlName="students">
+					</mat-form-field>
+				</ng-container>
 
-			<ng-template #studentContent>
-				<p class="card__email" *ngIf="!!user.email">Email: {{user.email}}</p>
-				<p class="card__email" *ngIf="!!user.age">Age: {{user.age}}</p>
-				<p class="card__email" *ngIf="!!user.location">Location: {{user.location}}</p>
-				<p class="card__email" *ngIf="!!user.languages">Languages: {{user.languages}}</p>
-				<p class="card__email">Mentors: {{user.mentors}}</p>
-			</ng-template>
+				<ng-template #studentContent>
+					<mat-form-field appearance="outline" *ngIf="!!user.email">
+						<mat-label>Email:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" placeholder="musk@example.com"
+									 formControlName="email"
+									 required>
+						<mat-error *ngIf="_f('email')?.invalid">{{getErrorMessage()}}</mat-error>
+					</mat-form-field>
+					<mat-form-field appearance="outline" *ngIf="!!user.age">
+						<mat-label>Age:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" formControlName="age">
+					</mat-form-field>
+					<mat-form-field appearance="outline" *ngIf="!!user.location">
+						<mat-label>Location:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" formControlName="location">
+					</mat-form-field>
+					<mat-form-field appearance="outline" *ngIf="!!user.languages">
+						<mat-label>Languages:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" formControlName="languages">
+					</mat-form-field>
+					<mat-form-field appearance="outline" *ngIf="user.mentors && user.mentors!.length > 0">
+						<mat-label>Mentors:</mat-label>
+						<input matInput [ngClass]="{'disabled': !isEdited}" [disabled]="!isEdited" formControlName="mentors">
+					</mat-form-field>
+				</ng-template>
+			</form>
 		</mat-card-content>
 		<mat-card-actions align="end">
 			<ng-container *ngIf="!isEdited; else editButtons">

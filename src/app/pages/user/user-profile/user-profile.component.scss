@@ -33,7 +33,28 @@
 
 	}
 
-	&__uid {
+	.default-form {
+		display: flex;
+		flex-flow: column wrap;
 
+		input {
+			&[disabled] {
+				//background: $second-gray;
+				//color: $fourth-gray;
+				cursor: not-allowed;
+				font-weight: 400;
+				box-shadow: none;
+				border: 1px solid transparent;
+				pointer-events: none;
+
+				svg {
+					path {
+						fill: $fourth-gray;
+					}
+				}
+			}
+		}
 	}
 }
+
+

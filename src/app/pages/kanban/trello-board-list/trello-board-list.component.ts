@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {BoardService} from "../board.service";
 import {Card} from "../board.model";
@@ -12,6 +12,7 @@ import {NotificationService} from "../../../services/notification.service";
 	styleUrls: ['./trello-board-list.component.scss']
 })
 export class TrelloBoardListComponent implements OnInit {
+	@Input('selectedID') userUID: string;
 	public boards: Array<any>;
 
 	constructor(

@@ -3,8 +3,11 @@
 </header>
 <mat-divider></mat-divider>
 <section class="main-container">
-	<article class="card-list">
+	<article *ngIf="mentors; else loader" class="card-list">
 		<app-user-card *ngFor="let mentor of mentors" [isMentor]="true" [user]="mentor">
 		</app-user-card>
 	</article>
+	<ng-template #loader>
+		<app-loader></app-loader>
+	</ng-template>
 </section>
