@@ -64,6 +64,11 @@ export class EmailLoginComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
+	createOnceSampleUsers() {
+		this.auth.createSampleUsers(66)
+
+	}
+
 	changeType(val: any) {
 		this.type = val;
 	}

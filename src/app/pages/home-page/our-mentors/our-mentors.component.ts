@@ -21,7 +21,7 @@ export class OurMentorsComponent implements OnInit {
 			position: 'Front-end dev at Stobox',
 			location: 'The USA, Washington',
 			photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHdLZAJzeEA2iYjsrN4CEXrg8ATQ1tB04blQ&usqp=CAU',
-			socialLink: 'https://calendly.com/volos-work/30min?month=2022-06'
+			socialLink: 'https://calendly.com/ivan-volos/intro-call-with-ivan-volos-clone'
 		},
 		{
 			uid: 'asd',
@@ -33,7 +33,7 @@ export class OurMentorsComponent implements OnInit {
 			position: 'Blockchain developer at Stobox',
 			location: 'Ukraine, Lviv',
 			photoURL: 'https://lh3.googleusercontent.com/a-/AOh14GjQT86sqMj8PVl34d6hTzAmaWXzYr1WR6kPElYE=s96-c',
-			socialLink: 'https://calendly.com/volos-work/30min?month=2022-06'
+			socialLink: 'https://calendly.com/ivan-volos/intro-call-with-ivan-volos-clone'
 		}, {
 			uid: 'asd',
 			email: 'aasd',
@@ -44,7 +44,7 @@ export class OurMentorsComponent implements OnInit {
 			position: 'Java Developer',
 			location: 'The USA, California',
 			photoURL: 'https://oodp.ca/media/tutor-8.jpg',
-			socialLink: 'https://calendly.com/volos-work/30min?month=2022-06'
+			socialLink: 'https://calendly.com/ivan-volos/intro-call-with-ivan-volos-clone'
 		}
 	];
 

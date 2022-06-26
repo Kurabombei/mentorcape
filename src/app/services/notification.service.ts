@@ -7,7 +7,7 @@ import {tap} from "rxjs";
 	providedIn: 'root'
 })
 export class NotificationService {
-	defaultHorizontalPos: MatSnackBarHorizontalPosition = 'start';
+	defaultHorizontalPos: MatSnackBarHorizontalPosition = 'end';
 	defaultVerticalPos: MatSnackBarVerticalPosition = 'bottom';
 
 	constructor(private snackBar: MatSnackBar, private router: Router) {
